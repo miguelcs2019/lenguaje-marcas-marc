@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notificar incidencia</title>
+</head>
+<body>
+<h1>Notificar incidencia</h1>
+<form action="procesar-incidencia.php" method="post">
+<fieldset>
+<legend>Datos de la incidencia</legend>
+<p>
+<label for="usuario">Usuario:</label>
+<input type="text" id="usuario" name="usuario" required>
+</p>
+<p>
+<label for="departamento">Departamento:</label>
+<select id="departamento" name="departamento" required>
+<option value="informatica">Informática</option>
+<option value="marketing">Marketing</option>
+<option value="ventas">Ventas</option>
+</select>
+</p>
+<p>
+<label for="descripcion">Descripción de la incidencia:</label><br>
+<textarea id="descripcion" name="descripcion" rows="3" cols="40" required></textarea>
+</p>
+</fieldset>
+<fieldset>
+<legend>Acciones</legend>
+<p>
+<input type="reset" value="Borrar datos">
+<input type="submit" value="Enviar incidencia"></p>
+</fieldset>
+</form>
+<div style="text-align:center; margin-top:40px;">
+    <a href="index.html" style="
+        display:inline-block;
+        padding:12px 20px;
+        background:linear-gradient(90deg,#007bff,#00eaff);
+        color:white;
+        text-decoration:none;
+        border-radius:8px;
+        box-shadow:0 0 12px #00eaff;
+        font-size:18px;
+        transition:0.3s;">
+        ⟵ Volver al índice
+    </a>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Formulario de contacto</title>
+</head>
+<body>
+<h1>Formulario de contacto</h1>
+
+<form method="get" action="">
+
+<p>
+<label for="nombre">Nombre:</label>
+<input type="text" id="nombre" name="nombre" maxlength="30" required>
+</p>
+
+<p>
+<label for="apellidos">Apellidos:</label>
+<input type="text" id="apellidos" name="apellidos" maxlength="30" required>
+</p>
+
+
+<p>
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required>
+</p>
+
+<p>
+<label for="asunto">Asunto:</label><br>
+<select id="asunto" name="asunto" size="3" required>
+<option value="presupuesto">Pedir presupuesto</option>
+<option value="cita">Solicitar cita previa</option>
+<option value="otros">Otros</option>
+</select>
+</p>
+
+<p>
+<label for="escogido">Cómo nos ha escogido:</label><br>
+<select id="escogido" name="escogido" multiple size="4">
+<option value="amigo">Un amigo</option>
+<option value="googleando">Googleando</option>
+<option value="buzoneo">Buzoneo</option>
+<option value="otros">Otros</option>
+</select>
+</p>
+<p>
+<label for="mensaje">Mensaje:</label><br>
+<textarea id="mensaje" name="mensaje" maxlength="300" rows="4" cols="50"></textarea>
+</p>
+<p>
+<input type="checkbox" id="rgpd" name="rgpd" required>
+<label for="rgpd">Acepto la cláusula RGPD</label>
+</p>
+<p>
+<input type="submit" value="Enviar">
+</p>
+</form>
+<div style="text-align:center; margin-top:40px;">
+    <a href="index.html" style="
+        display:inline-block;
+        padding:12px 20px;
+        background:linear-gradient(90deg,#007bff,#00eaff);
+        color:white;
+        text-decoration:none;
+        border-radius:8px;
+        box-shadow:0 0 12px #00eaff;
+        font-size:18px;
+        transition:0.3s;">
+        ⟵ Volver al índice
+    </a>
+</div>
+
+
+
+
+</body>
+
+
+
+</html>

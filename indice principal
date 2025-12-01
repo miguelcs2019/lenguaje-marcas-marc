@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice Principal</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #020613;
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 60px;
+            font-size: 38px;
+            color: #00d9ff;
+            text-shadow: 0 0 18px #00d9ff;
+        }
+        .boton {
+            display: block;
+            margin: 20px auto;
+            padding: 15px;
+            width: 300px;
+            font-size: 20px;
+            text-decoration: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #007bff, #00eaff);
+            color: #ffffff;
+        }
+        .boton:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Índice Principal</h1>
+
+    <a class="boton" href="index.html">Ir a los Ejercicios (1–27)</a>
+
+    <a class="boton" href="cine_base.html">Ir al Examen de Cine</a>
+
+</body>
+</html>

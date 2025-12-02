@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurante Isabel de Villena</title>
+    <link rel="stylesheet" href="estilosres.css">
+</head>
+
+<body>
+
+    <!-- 1. ENCABEZADO -->
+    <div id="encabezado">
+        <h1>Restaurante Isabel de Villena</h1>
+    </div>
+
+    <!-- 2. MENÚ DE NAVEGACIÓN -->
+    <div id="menu-inicial">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Menú</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </div>
+
+    <!-- 3. MENÚ DE PLATOS -->
+    <div id="platos">
+
+        <div class="plato" id="paella">
+            <img src="media/paella.jpg">
+            <h3>Paella Valenciana</h3>
+        </div>
+
+        <div class="plato otro">
+            <img src="media/fideua.jpeg">
+            <h3>Fideuà de Marisco</h3>
+        </div>
+
+        <div class="plato otro">
+            <img src="media/arrozalhorno.jpeg">
+            <h3>Arroz al Horno</h3>
+        </div>
+
+        <div class="plato otro">
+            <img src="media/bravas.jpeg">
+            <h3>Patatas Bravas</h3>
+        </div>
+
+        <div class="plato otro">
+            <img src="media/pulpo.jpeg">
+            <h3>Pulpo</h3>
+        </div>
+
+        <div class="plato otro">
+            <img src="media/calamares.jpeg">
+            <h3>Calamares</h3>
+        </div>
+
+        <div class="plato otro">
+            <img src="media/tiramisu.jpeg">
+            <h3>Tiramisú</h3>
+        </div>
+
+        <div class="plato otro">
+            <img src="media/tartaqueso.jpeg">
+            <h3>Tarta de Queso</h3>
+        </div>
+
+        <div class="plato otro">
+            <img src="media/cuajada.jpeg">
+            <h3>Cuajada</h3>
+        </div>
+
+    </div>
+
+
+    <!-- 4. BLOQUE COMBINADO -->
+    <div id="info-combinada">
+
+        <!-- ALÉRGENOS -->
+        <div id="alergenos">
+            <h2>Información sobre alérgenos</h2>
+            <ol>
+                <li>Gluten</li>
+                <li>Crustáceos</li>
+                <li>Huevo</li>
+                <li>Pescado</li>
+                <li>Lácteos</li>
+            </ol>
+        </div>
+
+        <!-- TABLA DE PRECIOS -->
+        <div id="tabla-precios">
+            <h2>Tabla de precios</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Platos Principales</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Paella Valenciana</td>
+                        <td>12.50€</td>
+                    </tr>
+                    <tr>
+                        <td>Fideuà</td>
+                        <td>13.00€</td>
+                    </tr>
+                    <tr>
+                        <td>Arroz al Horno</td>
+                        <td>11.00€</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center; font-weight:bold;">
+                            Especialidad del día incluida
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <!-- 5. FORMULARIO DE RESERVA -->
+    <h2 id="titulo-formulario">Reserva tu mesa</h2>
+
+    <div id="formulario">
+        <form>
+            <label>Nombre:</label>
+            <input type="text">
+
+            <label>Número de personas:</label>
+            <input type="number">
+
+            <label>Hora de la reserva:</label>
+            <select>
+                <option>13:00</option>
+                <option>14:00</option>
+                <option>15:00</option>
+            </select>
+
+            <label>Comentarios / alergias:</label>
+            <textarea></textarea>
+
+            <label class="check">
+                <input type="checkbox">
+                Acepto las políticas de seguridad
+            </label>
+
+            <input id="btn" type="submit" value="Enviar reserva">
+        </form>
+    </div>
+
+
+    <!-- 6. FOOTER -->
+    <div id="footer">
+        <h3>Información adicional</h3>
+        <p>
+            Este sitio web es un ejemplo para el examen final.
+            Aquí puedes practicar <strong>negritas</strong> y <em>cursivas</em>.
+        </p>
+
+        <h4>Enlaces útiles</h4>
+        <ul>
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+
+        <p class="copy">© 2025 Restaurante Isabel de Villena</p>
+    </div>
+
+</body>
+</html>

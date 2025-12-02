@@ -1,0 +1,204 @@
+/* GENERAL */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fafafa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* 1. ENCABEZADO -------------------------------------------------------- */
+
+#encabezado {
+    background: #eaf2fb;
+    border: 3px solid #3a6ea5;
+    padding: 15px;
+    text-align: center;
+}
+
+#encabezado h1 {
+    margin: 0;
+    color: #2c4a70;
+}
+
+/* 2. MENÚ --------------------------------------------------------------- */
+
+#menu-inicial {
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+}
+
+#menu-inicial ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-inicial li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+#menu-inicial a {
+    color: #3465a4;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#menu-inicial a:hover {
+    color: #d64545;
+    text-decoration: underline;
+}
+
+/* 3. PLATOS -------------------------------------------------------------- */
+
+#platos {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.plato {
+    display: inline-block;
+    width: 28%;
+    margin: 1%;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 1%;
+    vertical-align: top;
+}
+
+.plato img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.plato h3 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* BORDES ESPECIALES */
+#paella {
+    border: 3px solid #ffca28;
+}
+
+.otro {
+    border: 3px dotted #5a7ca3;
+}
+
+/* 4. INFO COMBINADA ------------------------------------------------------ */
+
+#info-combinada {
+    width: 90%;
+    margin: 30px auto;
+}
+
+#alergenos {
+    float: left;
+    width: 45%;
+    background: #fff7e6;
+    border: 2px solid #e0c285;
+    padding: 10px;
+}
+
+#alergenos h2 {
+    background: #fff1cc;
+    color: #8a5d00;
+    border: 2px solid #d4a74e;
+    padding: 6px;
+}
+
+#alergenos ol {
+    list-style-type: upper-roman;
+    margin-left: 40px;
+}
+
+#alergenos li {
+    font-weight: bold;
+    color: #8a5d00;
+}
+
+#tabla-precios {
+    width: 45%;
+    margin-left: 50%;
+    background: white;
+    border: 2px solid #e0c285;
+    padding: 10px;
+}
+
+#tabla-precios h2 {
+    background: #fff1cc;
+    color: #8a5d00;
+    border: 2px solid #d4a74e;
+    padding: 6px;
+}
+
+#tabla-precios table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid blue;
+}
+
+#tabla-precios th,
+#tabla-precios td {
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+#tabla-precios thead {
+    background: #dce8ff;
+}
+
+#tabla-precios tr:hover {
+    background: yellow;
+}
+
+/* 5. FORMULARIO ---------------------------------------------------------- */
+
+#titulo-formulario {
+    text-align: center;
+    display: inline-block;
+    border: 2px solid #888;
+    padding: 6px;
+    margin-top: 30px;
+    color: #333;
+}
+
+#formulario {
+    border: 4px double black;
+    width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+#formulario input,
+#formulario select,
+#formulario textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+#formulario .check input {
+    width: auto;
+    margin-right: 6px;
+}
+
+#btn {
+    background: blue;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+#btn:hover {
+    background: navy;
+}
+
+/* 6. FOOTER (ya incluido en base) ----------------------------------------- */

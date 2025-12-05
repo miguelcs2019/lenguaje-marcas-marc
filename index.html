@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Prácticas – Miguel</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #00111f, #000814);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 60px;
+            color: #8deaff;
+            text-shadow: 0 0 15px #00eaff;
+        }
+
+        .contenedor {
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            width: 280px;
+            padding: 25px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 18px;
+            text-decoration: none;
+            color: #cfffff;
+            border: 2px solid #00eaff;
+            font-size: 22px;
+            font-weight: bold;
+            transition: .3s;
+            backdrop-filter: blur(5px);
+            text-shadow: 0 0 10px #00eaff;
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 35px #00eaff;
+            background: rgba(0,255,255,0.25);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <h1>Portal Prácticas – Miguel</h1>
+
+        <div class="botones">
+
+            <!-- BOTÓN IZQUIERDA → Lenguaje de Marcas -->
+            <a class="btn" href="portalmarques.html">
+                Lenguaje de Marcas
+            </a>
+
+            <!-- BOTÓN DERECHA → Fonaments -->
+            <a class="btn" href="fonaments_portal.html">
+                Fonaments de Programació
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actividad 11 – ¿Qué es DMI?</title>
+  <style>
+    :root{
+      --bg0:#050814;
+      --bg1:#07102a;
+      --panel: rgba(255,255,255,.06);
+      --line: rgba(148,163,184,.18);
+      --text: #e5e7eb;
+      --muted:#9aa6bd;
+      --a:#60a5fa;
+      --b:#22c55e;
+      --d:#a78bfa;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Segoe UI", Arial, sans-serif;
+      color:var(--text);
+      padding:28px 14px;
+      background:
+        radial-gradient(1200px 700px at 10% 15%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(1000px 600px at 85% 25%, rgba(34,197,94,.14), transparent 60%),
+        radial-gradient(900px 700px at 50% 95%, rgba(167,139,250,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.03),
+        rgba(255,255,255,.03) 1px,
+        transparent 1px,
+        transparent 6px
+      );
+      pointer-events:none;
+      mix-blend-mode: overlay;
+      opacity:.25;
+    }
+
+    .wrap{max-width:1100px;margin:0 auto}
+
+    header{
+      position:relative;
+      border-radius:22px;
+      padding:22px 22px;
+      background: linear-gradient(135deg, rgba(96,165,250,.14), rgba(34,197,94,.10));
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 46px rgba(0,0,0,.35);
+      overflow:hidden;
+      margin-bottom:16px;
+    }
+    header:after{
+      content:"";
+      position:absolute; inset:-50px -80px auto auto;
+      width:360px;height:360px;
+      background: radial-gradient(circle, rgba(96,165,250,.22), transparent 62%);
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(6,10,24,.55);
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:#dbeafe;
+      margin-bottom:10px;
+    }
+    .kdot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--a);
+      box-shadow: 0 0 0 6px rgba(96,165,250,.15);
+    }
+
+    h1{margin:0 0 8px 0;font-size:32px;line-height:1.12}
+    .sub{
+      margin:0;
+      color: var(--muted);
+      line-height:1.65;
+      max-width: 90ch;
+      text-align:justify;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+      margin-top:16px;
+      align-items:start;
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius:18px;
+      padding:16px 16px;
+      box-shadow: 0 16px 38px rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+    }
+    .card h2{
+      margin:0 0 10px 0;
+      font-size:18px;
+      color:#eaf2ff;
+      letter-spacing:.02em;
+    }
+
+    p{margin:8px 0; line-height:1.65; text-align:justify}
+    ul{margin:10px 0 0 18px; color:var(--text); line-height:1.65}
+    li{margin:6px 0}
+
+    .callout{
+      margin-top:12px;
+      border-radius:14px;
+      padding:12px 12px;
+      border:1px solid rgba(34,197,94,.22);
+      background: linear-gradient(135deg, rgba(34,197,94,.12), rgba(96,165,250,.08));
+      color:#e5e7eb;
+      font-size:14px;
+      line-height:1.6;
+      text-align:justify;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,.16);
+      background: rgba(6,10,24,.45);
+      margin-top:10px;
+    }
+    th,td{
+      padding:12px 12px;
+      font-size:14px;
+      border-bottom:1px solid rgba(148,163,184,.14);
+      vertical-align:top;
+      text-align:left;
+    }
+    th{
+      background: rgba(167,139,250,.10);
+      color:#eaf2ff;
+      font-weight:700;
+    }
+    tr:last-child td{border-bottom:none}
+
+    /* Mini diagrama */
+    .diagram{
+      position:relative;
+      border-radius:18px;
+      border:1px solid rgba(148,163,184,.18);
+      background:
+        radial-gradient(700px 400px at 20% 20%, rgba(96,165,250,.14), transparent 60%),
+        radial-gradient(700px 400px at 80% 35%, rgba(34,197,94,.10), transparent 60%),
+        rgba(6,10,24,.55);
+      padding:14px;
+      overflow:hidden;
+      margin-top:10px;
+    }
+    .diagram:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity:.12;
+      pointer-events:none;
+    }
+
+    .foot{
+      margin-top:10px;
+      font-size:12px;
+      color: var(--muted);
+      line-height:1.5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="kicker"><span class="kdot"></span>Actividad 11 · Chipset / CPU</div>
+      <h1>¿Qué es DMI (Direct Media Interface)?</h1>
+      <p class="sub">
+        DMI es una interfaz de Intel que sirve para conectar el <b>procesador (CPU)</b> con el <b>chipset</b>
+        de la placa base (normalmente el <b>PCH</b>). Su objetivo es mover datos entre ambos sin que el
+        chipset se convierta en un cuello de botella.
+      </p>
+    </header>
+
+    <div class="grid">
+
+      <section class="card">
+        <h2>1) ¿Qué es DMI?</h2>
+        <p>
+          <b>DMI (Direct Media Interface)</b> es un enlace de comunicación desarrollado por <b>Intel</b> que conecta
+          directamente la <b>CPU</b> con el <b>chipset</b> (PCH). Se usa en placas modernas y reemplaza la idea
+          antigua de “puente norte y puente sur”, simplificando la arquitectura.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>2) ¿Qué función tiene?</h2>
+        <p>
+          La función de DMI es permitir que la CPU se comunique con los componentes que dependen del chipset.
+          Por ejemplo:
+        </p>
+        <ul>
+          <li>Puertos <b>USB</b></li>
+          <li>Almacenamiento <b>SATA</b> (y algunos NVMe según placa)</li>
+          <li><b>Tarjeta de red</b> integrada</li>
+          <li><b>Audio</b> integrado</li>
+          <li>Ranuras PCIe secundarias y controladoras extra</li>
+        </ul>
+
+        <div class="callout">
+          Resumen fácil: DMI es como la “autopista” que une la CPU con el chipset para que todo lo que no va directo a la CPU
+          (USB, SATA, red, audio…) pueda funcionar y comunicarse.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3) ¿Cómo comunica CPU ↔ Chipset?</h2>
+        <p>
+          La CPU gestiona lo más rápido de forma directa (por ejemplo, RAM, GPU y algunos NVMe). El chipset
+          gestiona el resto de entradas/salidas. <b>DMI</b> es el enlace que une ambos.
+        </p>
+
+        <div class="diagram" aria-label="Diagrama CPU a Chipset por DMI">
+          <svg width="100%" height="220" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#60a5fa" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="#a78bfa" stop-opacity="0.9"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" x2="1">
+                <stop offset="0" stop-color="#22c55e" stop-opacity="0.85"/>
+                <stop offset="1" stop-color="#60a5fa" stop-opacity="0.75"/>
+              </linearGradient>
+              <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="rgba(229,231,235,.9)"/>
+              </marker>
+            </defs>
+
+            <!-- CPU -->
+            <rect x="60" y="55" rx="18" ry="18" width="260" height="110" fill="url(#g1)" opacity="0.95"/>
+            <text x="190" y="105" text-anchor="middle" font-family="Segoe UI, Arial" font-size="20" fill="#0b1220" font-weight="800">CPU</text>
+            <text x="190" y="130" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" fill="#0b1220" opacity=".9">
+              RAM / GPU / PCIe principal
+            </text>
+
+            <!-- DMI line -->
+            <line x1="320" y1="110" x2="580" y2="110" stroke="rgba(229,231,235,.85)" stroke-width="4" marker-end="url(#arr)"/>
+            <text x="450" y="92" text-anchor="middle" font-family="Segoe UI, Arial" font-size="14" fill="rgba(229,231,235,.9)" font-weight="700">
+              Enlace DMI
+            </text>
+
+            <!-- PCH -->
+            <rect x="580" y="55" rx="18" ry="18" width="260" height="110" fill="url(#g2)" opacity="0.95"/>
+            <text x="710" y="105" text-anchor="middle" font-family="Segoe UI, Arial" font-size="20" fill="#07102a" font-weight="800">Chipset / PCH</text>
+            <text x="710" y="130" text-anchor="middle" font-family="Segoe UI, Arial" font-size="12" fill="#07102a" opacity=".9">
+              USB / SATA / Red / Audio / PCIe extra
+            </text>
+          </svg>
+        </div>
+
+        <div class="foot">
+          Idea clave: si conectas muchos dispositivos al chipset (USB, discos, etc.), el rendimiento global depende también del ancho de banda del enlace DMI.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>4) ¿Qué versiones existen?</h2>
+        <p>
+          Intel ha ido actualizando DMI para aumentar el ancho de banda. A nivel de concepto, muchas versiones
+          se relacionan con tecnologías similares a PCI Express (más velocidad y más “carriles” en plataformas nuevas).
+        </p>
+
+        <table>
+          <tr>
+            <th>Versión</th>
+            <th>Idea general</th>
+          </tr>
+          <tr>
+            <td><b>DMI 1.0</b></td>
+            <td>Primera versión en plataformas antiguas.</td>
+          </tr>
+          <tr>
+            <td><b>DMI 2.0</b></td>
+            <td>Mejora de ancho de banda frente a 1.0.</td>
+          </tr>
+          <tr>
+            <td><b>DMI 3.0</b></td>
+            <td>Muy común en placas Intel modernas durante varias generaciones.</td>
+          </tr>
+          <tr>
+            <td><b>DMI 4.0</b></td>
+            <td>Más ancho de banda para chipsets y plataformas recientes.</td>
+          </tr>
+        </table>
+
+        <div class="callout">
+          En lenguaje de Grado Medio: “DMI es el cable rápido interno que une CPU y chipset. Cada versión nueva es una mejora para que no haya atascos cuando conectas muchos dispositivos.”
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Conclusión</h2>
+        <p>
+          DMI es fundamental en placas Intel modernas porque permite que el procesador se comunique con el chipset
+          de forma rápida y estable. Sin DMI, los dispositivos del chipset (USB, SATA, red, audio…) tendrían
+          más limitaciones y podrían generar cuellos de botella.
+        </p>
+      </section>
+
+    </div>
+  </div>
+</body>
+</html>

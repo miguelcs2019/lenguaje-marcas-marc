@@ -67,6 +67,30 @@
       box-shadow:0 10px 22px rgba(15,23,42,.08);
       background:linear-gradient(180deg,#ffffff,#f8fbff);
     }
+
+    /* === SOLO AÑADIDO PARA LA IMAGEN (NO TOCA NADA MÁS) === */
+    .board-img{
+      margin-top:12px;
+      text-align:center;
+    }
+    .board-img img{
+      max-width:100%;
+      width:520px;
+      height:auto;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,.7);
+      box-shadow:0 10px 22px rgba(15,23,42,.10);
+      display:inline-block;
+      background:#fff;
+    }
+    .board-img .caption{
+      font-size:12px;
+      color:#334155;
+      margin-top:6px;
+      text-align:center;
+    }
+    /* === FIN AÑADIDO === */
+
     .legend{
       display:flex;
       gap:10px;
@@ -198,6 +222,14 @@ Incluye Wi-Fi 7 y 5G LAN
 </svg>
   </div>
 
+  <!-- === SOLO AÑADIDO: IMAGEN DE LA PLACA DEBAJO DEL DIAGRAMA === -->
+  <div class="board-img">
+    <!-- Cambia el nombre del archivo por el que tú subas a /img -->
+    <img src="img/tomah.PNG" alt="MSI MAG B860 TOMAHAWK WIFI">
+    <div class="caption">Imagen de la placa Tomahawk<b></b></div>
+  </div>
+  <!-- === FIN AÑADIDO === -->
+
   <div class="legend">
     <span><i class="dot d-cpu"></i>CPU</span>
     <span><i class="dot d-storage"></i>RAM / M.2</span>
@@ -215,3 +247,4 @@ Incluye Wi-Fi 7 y 5G LAN
 </div>
 </body>
 </html>
+

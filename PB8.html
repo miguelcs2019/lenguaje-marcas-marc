@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Actividad 8 – % Mejora PCIe + Gráfica Futurista</title>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<style>
+  :root{
+    --bg0:#050814;
+    --bg1:#07102a;
+    --panel: rgba(255,255,255,.06);
+    --panel2: rgba(255,255,255,.08);
+    --line: rgba(148,163,184,.18);
+    --text: #e5e7eb;
+    --muted:#9aa6bd;
+    --a:#60a5fa;
+    --b:#22c55e;
+    --c:#f59e0b;
+    --d:#a78bfa;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+    padding: 28px 14px;
+
+    background:
+      radial-gradient(1200px 700px at 10% 15%, rgba(96,165,250,.18), transparent 60%),
+      radial-gradient(1000px 600px at 85% 25%, rgba(34,197,94,.14), transparent 60%),
+      radial-gradient(900px 700px at 50% 95%, rgba(167,139,250,.12), transparent 55%),
+      linear-gradient(180deg, var(--bg0), var(--bg1));
+    overflow-x:hidden;
+  }
+
+  /* “scanlines” suaves */
+  body:before{
+    content:"";
+    position:fixed; inset:0;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.03) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+    pointer-events:none;
+    mix-blend-mode: overlay;
+    opacity:.25;
+  }
+
+  .wrap{max-width:1100px;margin:0 auto}
+
+  header{
+    position:relative;
+    border-radius: 22px;
+    padding: 22px 22px;
+    background: linear-gradient(135deg, rgba(96,165,250,.14), rgba(34,197,94,.10));
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 46px rgba(0,0,0,.35);
+    overflow:hidden;
+    margin-bottom:16px;
+  }
+  header:after{
+    content:"";
+    position:absolute; inset:-50px -80px auto auto;
+    width:360px;height:360px;
+    background: radial-gradient(circle, rgba(96,165,250,.22), transparent 62%);
+    transform: rotate(18deg);
+    pointer-events:none;
+  }
+
+  .kicker{
+    display:inline-flex;
+    gap:10px;
+    align-items:center;
+    padding: 6px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(6,10,24,.55);
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:#dbeafe;
+    margin-bottom:10px;
+  }
+  .kdot{
+    width:10px;height:10px;border-radius:50%;
+    background: var(--a);
+    box-shadow: 0 0 0 6px rgba(96,165,250,.15);
+  }
+
+  h1{margin:0 0 8px 0;font-size:32px;line-height:1.12}
+  .sub{
+    margin:0;
+    color: var(--muted);
+    line-height:1.65;
+    max-width: 80ch;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:16px;
+    margin-top:16px;
+    align-items:start;
+  }
+  @media (max-width: 980px){
+    .grid{grid-template-columns:1fr}
+  }
+
+  .card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 16px 16px;
+    box-shadow: 0 16px 38px rgba(0,0,0,.28);
+    backdrop-filter: blur(10px);
+  }
+
+  .card h2{
+    margin:0 0 10px 0;
+    font-size:18px;
+    color:#eaf2ff;
+    letter-spacing:.02em;
+  }
+
+  p{margin:8px 0; line-height:1.65; color: var(--text); text-align:justify}
+  .muted{color: var(--muted)}
+  .badge{
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(6,10,24,.55);
+    color:#dbeafe;
+    font-size:12px;
+    margin-right:8px;
+    margin-top:6px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    overflow:hidden;
+    border-radius:14px;
+    border:1px solid rgba(148,163,184,.16);
+    background: rgba(6,10,24,.45);
+  }
+  th,td{
+    padding:12px 12px;
+    font-size:14px;
+    border-bottom:1px solid rgba(148,163,184,.14);
+    vertical-align:top;
+  }
+  th{
+    background: rgba(96,165,250,.12);
+    color:#eaf2ff;
+    font-weight:700;
+  }
+  tr:last-child td{border-bottom:none}
+
+  .callout{
+    margin-top:12px;
+    border-radius:14px;
+    padding:12px 12px;
+    border:1px solid rgba(34,197,94,.22);
+    background: linear-gradient(135deg, rgba(34,197,94,.12), rgba(96,165,250,.08));
+    color:#e5e7eb;
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  /* Panel de gráfica */
+  .chartPanel{
+    position:relative;
+    padding: 14px 14px 10px 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(148,163,184,.18);
+    background:
+      radial-gradient(700px 400px at 20% 20%, rgba(96,165,250,.15), transparent 60%),
+      radial-gradient(700px 400px at 80% 35%, rgba(34,197,94,.10), transparent 60%),
+      rgba(6,10,24,.55);
+    box-shadow: 0 16px 38px rgba(0,0,0,.30);
+    overflow:hidden;
+  }
+
+  /* Rejilla HUD */
+  .chartPanel:before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+    opacity:.14;
+    pointer-events:none;
+  }
+
+  /* Brillo lateral */
+  .chartPanel:after{
+    content:"";
+    position:absolute; inset:-60px auto -60px -80px;
+    width:260px;
+    background: radial-gradient(circle, rgba(167,139,250,.25), transparent 60%);
+    transform: rotate(-18deg);
+    pointer-events:none;
+    opacity:.55;
+  }
+
+  .foot{
+    margin-top:10px;
+    font-size:12px;
+    color: var(--muted);
+    line-height:1.5;
+  }
+
+  .tiny{
+    font-size:12px;
+    color: var(--muted);
+  }
+
+  /* ====== SOLO PARA ARREGLAR LA GRAFICA (NO TOCO MAS) ====== */
+  .chartBox{
+    position: relative;
+    width: 100%;
+    height: 320px; /* altura real para que Chart.js NO se descontrole */
+  }
+  #pcieChart{
+    width: 100% !important;
+    height: 100% !important;
+    display:block;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker"><span class="kdot"></span>Actividad 8 · PCI Express</div>
+    <h1>% de mejora entre generaciones PCIe + Gráfica futurista</h1>
+    <p class="sub">
+      Para que el cálculo sea realista y no “todo 100%”, se usa el <b>ancho de banda efectivo por lane (payload)</b>,
+      que tiene en cuenta la codificación (8b/10b y 128b/130b). Por eso, la subida de <b>PCIe 2.0 → 3.0</b> queda en
+      <b>~96,9%</b>, mientras que el resto de saltos siguen siendo aproximadamente el doble.
+    </p>
+  </header>
+
+  <div class="grid">
+
+    <!-- Cálculos y tabla -->
+    <section class="card">
+      <h2>1) Datos base (por lane, por dirección)</h2>
+
+      <p class="muted tiny">
+        Unidades: MB/s por lane (x1) por dirección. Se emplean valores efectivos comunes (payload).
+      </p>
+
+      <table>
+        <tr>
+          <th>Gen</th>
+          <th>Velocidad efectiva</th>
+          <th>Nota</th>
+        </tr>
+        <tr>
+          <td><b>PCIe 1.0</b></td>
+          <td>250 MB/s</td>
+          <td>8b/10b</td>
+        </tr>
+        <tr>
+          <td><b>PCIe 2.0</b></td>
+          <td>500 MB/s</td>
+          <td>8b/10b</td>
+        </tr>
+        <tr>
+          <td><b>PCIe 3.0</b></td>
+          <td>984,6 MB/s</td>
+          <td>128b/130b (más eficiente)</td>
+        </tr>
+        <tr>
+          <td><b>PCIe 4.0</b></td>
+          <td>1969,2 MB/s</td>
+          <td>128b/130b</td>
+        </tr>
+        <tr>
+          <td><b>PCIe 5.0</b></td>
+          <td>3938,4 MB/s</td>
+          <td>128b/130b</td>
+        </tr>
+        <tr>
+          <td><b>PCIe 6.0</b></td>
+          <td>~7876,8 MB/s (≈7,88 GB/s)</td>
+          <td>64 GT/s + PAM4 (con FEC a nivel físico)</td>
+        </tr>
+      </table>
+
+      <div class="callout">
+        <b>Fórmula usada:</b><br>
+        Mejora (%) = ((Nuevo − Anterior) / Anterior) × 100
+      </div>
+    </section>
+
+    <!-- Resultados y explicación -->
+    <section class="card">
+      <h2>2) Resultados del % de mejora</h2>
+
+      <table>
+        <tr>
+          <th>Comparación</th>
+          <th>Mejora</th>
+          <th>Detalle</th>
+        </tr>
+        <tr>
+          <td><b>6.0 vs 5.0</b></td>
+          <td><b>+100%</b></td>
+          <td>3,94 → 7,88 GB/s (por lane)</td>
+        </tr>
+        <tr>
+          <td><b>5.0 vs 4.0</b></td>
+          <td><b>+100%</b></td>
+          <td>1969,2 → 3938,4 MB/s</td>
+        </tr>
+        <tr>
+          <td><b>4.0 vs 3.0</b></td>
+          <td><b>+100%</b></td>
+          <td>984,6 → 1969,2 MB/s</td>
+        </tr>
+        <tr>
+          <td><b>3.0 vs 2.0</b></td>
+          <td><b>+96,9%</b></td>
+          <td>500 → 984,6 MB/s (no llega a 1000)</td>
+        </tr>
+        <tr>
+          <td><b>2.0 vs 1.0</b></td>
+          <td><b>+100%</b></td>
+          <td>250 → 500 MB/s</td>
+        </tr>
+      </table>
+
+      <p class="muted">
+        ¿Por qué el salto <b>2.0 → 3.0</b> no es “clavado” al 100%? Porque cambia la codificación
+        y el resultado efectivo publicado es <b>984,6 MB/s</b> por lane, no 1000 MB/s.
+      </p>
+
+      <div class="callout">
+        Esto se puede explicar como:
+        <b>“Casi duplica”</b> y además <b>PCIe 3.0 mejora la eficiencia</b> con 128b/130b.
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Gráfica -->
+  <section class="chartPanel" style="margin-top:16px;">
+    <div style="position:relative; z-index:1;">
+      <h2 style="margin:0 0 10px 0; font-size:18px; color:#eaf2ff;">3) Gráfica de barras (% de mejora)</h2>
+
+      <!-- SOLO CAMBIO: contenedor con altura real -->
+      <div class="chartBox">
+        <canvas id="pcieChart" height="140"></canvas>
+      </div>
+
+      <div class="foot">
+        Nota: la gráfica representa el % calculado a partir de “payload por lane”.
+        En uso real puede haber variaciones por overhead de protocolo y cargas de trabajo.
+      </div>
+
+      <!-- SOLO AÑADIDO: fuentes visibles debajo -->
+      <div class="foot" style="margin-top:12px;">
+        <b>Fuentes:</b><br>
+        - https://en.wikipedia.org/wiki/PCI_Express<br>
+        - https://www.hp.com/us-en/shop/tech-takes/what-are-pcie-slots-pc<br>
+        - https://docs.baslerweb.com/knowledge/transfer-speeds-explained-gigatransfers-per-second-gts<br>
+        - https://pcisig.com/sites/default/files/files/HOTI_PCIe6.0.pdf
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Datos (payload por lane, por dirección)
+  const pcie = {
+    "1.0": 250.0,
+    "2.0": 500.0,
+    "3.0": 984.6,
+    "4.0": 1969.2,
+    "5.0": 3938.4,
+    "6.0": 7876.8
+  };
+
+  function pct(nuevo, anterior){
+    return ((nuevo - anterior) / anterior) * 100;
+  }
+
+  const labels = [
+    "PCIe 6.0 vs 5.0",
+    "PCIe 5.0 vs 4.0",
+    "PCIe 4.0 vs 3.0",
+    "PCIe 3.0 vs 2.0",
+    "PCIe 2.0 vs 1.0"
+  ];
+
+  const values = [
+    pct(pcie["6.0"], pcie["5.0"]),
+    pct(pcie["5.0"], pcie["4.0"]),
+    pct(pcie["4.0"], pcie["3.0"]),
+    pct(pcie["3.0"], pcie["2.0"]),
+    pct(pcie["2.0"], pcie["1.0"])
+  ].map(v => Math.round(v * 10) / 10); // 1 decimal
+
+  // Plugin para “glow” estilo futurista
+  const glowPlugin = {
+    id: 'glowPlugin',
+    beforeDatasetsDraw(chart, args, pluginOptions) {
+      const {ctx} = chart;
+      ctx.save();
+      ctx.shadowColor = pluginOptions.shadowColor || 'rgba(96,165,250,.55)';
+      ctx.shadowBlur = pluginOptions.shadowBlur || 18;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+    },
+    afterDatasetsDraw(chart, args, pluginOptions) {
+      chart.ctx.restore();
+    }
+  };
+
+  Chart.register(glowPlugin);
+
+  const canvas = document.getElementById("pcieChart");
+  const ctx = canvas.getContext("2d");
+
+  // Gradiente para barras
+  function barGradient(ctx, area){
+    const g = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+    g.addColorStop(0, "rgba(96,165,250,.35)");
+    g.addColorStop(0.55, "rgba(34,197,94,.55)");
+    g.addColorStop(1, "rgba(167,139,250,.70)");
+    return g;
+  }
+
+  let gradient;
+
+  const chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "Mejora (%)",
+        data: values,
+        borderWidth: 1,
+        borderColor: "rgba(226,232,240,.65)",
+        backgroundColor: (context) => {
+          const chart = context.chart;
+          const {chartArea} = chart;
+          if (!chartArea) return "rgba(96,165,250,.5)";
+          if (!gradient) gradient = barGradient(chart.ctx, chartArea);
+          return gradient;
+        },
+        borderRadius: 10,
+        maxBarThickness: 52,
+        hoverBackgroundColor: "rgba(96,165,250,.85)"
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false, /* ahora SI porque el contenedor tiene altura */
+      animation: {
+        duration: 1200,
+        easing: "easeOutQuart"
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: "rgba(226,232,240,.9)"
+          }
+        },
+        tooltip: {
+          backgroundColor: "rgba(2,6,23,.92)",
+          titleColor: "#e2e8f0",
+          bodyColor: "#e2e8f0",
+          borderColor: "rgba(148,163,184,.25)",
+          borderWidth: 1,
+          callbacks: {
+            label: (ctx) => ` ${ctx.raw}%`
+          }
+        },
+        glowPlugin: {
+          shadowColor: "rgba(167,139,250,.45)",
+          shadowBlur: 18
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: "rgba(226,232,240,.85)" },
+          grid: { color: "rgba(148,163,184,.10)" }
+        },
+        y: {
+          beginAtZero: true,
+          suggestedMax: 110,
+          ticks: {
+            color: "rgba(226,232,240,.85)",
+            callback: (v) => v + "%"
+          },
+          grid: {
+            color: "rgba(148,163,184,.12)"
+          }
+        }
+      }
+    }
+  });
+
+  // Recalcular gradiente al redimensionar
+  window.addEventListener("resize", () => { gradient = null; });
+</script>
+
+<!-- Fuentes (para documentar tu trabajo):
+  - PCIe 3.0 128b/130b y ~985 MB/s por lane: https://en.wikipedia.org/wiki/PCI_Express
+  - Tabla por generaciones (250/500/985/1.97/3.94/7.88): https://www.hp.com/us-en/shop/tech-takes/what-are-pcie-slots-pc
+  - Eficiencia 128b/130b y 984.6 MB/s: https://docs.baslerweb.com/knowledge/transfer-speeds-explained-gigatransfers-per-second-gts
+  - PCIe 6.0 PAM4 / FEC (presentación PCI-SIG): https://pcisig.com/sites/default/files/files/HOTI_PCIe6.0.pdf
+-->
+</body>
+</html>

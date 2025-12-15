@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actividad 5 – MSI MAG B860 TOMAHAWK WIFI</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:"Segoe UI", Arial, sans-serif;
+      background:#f3f7fc;
+      color:#0f172a;
+      padding:28px 14px;
+    }
+    .wrap{max-width:1100px;margin:0 auto;}
+    header{
+      background:#ffffff;
+      border:1px solid rgba(148,163,184,.7);
+      border-radius:18px;
+      padding:18px 20px;
+      box-shadow:0 10px 22px rgba(15,23,42,.08);
+      margin-bottom:18px;
+    }
+    header .pill{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:#1d4ed8;
+      color:#eaf2ff;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    h1{margin:0 0 6px 0;font-size:30px;}
+    p{margin:8px 0;line-height:1.6;text-align:justify;}
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      align-items:start;
+    }
+    .card{
+      background:#ffffff;
+      border:1px solid rgba(148,163,184,.7);
+      border-radius:18px;
+      padding:16px 18px;
+      box-shadow:0 10px 22px rgba(15,23,42,.08);
+    }
+    .card h2{margin:0 0 10px 0;font-size:20px;color:#1e40af;}
+    .meta{display:grid;gap:10px;font-size:14px;}
+    .kv{
+      padding:10px 12px;
+      border-radius:14px;
+      background:#eef5ff;
+      border:1px solid rgba(59,130,246,.25);
+    }
+    .kv b{color:#0b2a66;}
+    .note{font-size:13px;color:#334155;margin-top:10px;}
+
+    .diagram-wrap{
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid rgba(148,163,184,.7);
+      box-shadow:0 10px 22px rgba(15,23,42,.08);
+      background:linear-gradient(180deg,#ffffff,#f8fbff);
+    }
+    .legend{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+      font-size:13px;
+      color:#334155;
+    }
+    .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;}
+    .d-cpu{background:#1d4ed8;}
+    .d-chip{background:#0ea5e9;}
+    .d-io{background:#16a34a;}
+    .d-storage{background:#f59e0b;}
+
+    @media(max-width:900px){
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <span class="pill">Actividad 5</span>
+  <h1>MSI MAG B860 TOMAHAWK WIFI – PCIe 5.0</h1>
+  <p>
+    En esta actividad se analiza una placa base moderna con soporte para <b>PCIe 5.0</b>.
+    Se indica su modelo real, chipset y tipo de arquitectura, y se representa mediante
+    un diagrama qué componentes se conectan directamente al <b>procesador</b> y cuáles
+    dependen del <b>chipset (PCH)</b>.
+  </p>
+</header>
+
+<div class="grid">
+
+<!-- DATOS -->
+<div class="card">
+  <h2>1) Datos de la placa base</h2>
+
+  <div class="meta">
+    <div class="kv"><b>Modelo:</b> MSI MAG B860 TOMAHAWK WIFI</div>
+    <div class="kv"><b>Socket:</b> LGA 1851</div>
+    <div class="kv"><b>Procesadores compatibles:</b> Intel Core Ultra (Serie 2)</div>
+    <div class="kv"><b>Chipset:</b> Intel B860</div>
+    <div class="kv"><b>Tipo de chipset:</b> PCH (Platform Controller Hub)</div>
+    <div class="kv"><b>Memoria:</b> DDR5 hasta 9200 MHz (OC)</div>
+    <div class="kv"><b>Ranura gráfica:</b> 1 × PCIe 5.0 x16</div>
+    <div class="kv"><b>Almacenamiento:</b> 1 × M.2 PCIe Gen5 + SATA</div>
+    <div class="kv"><b>Red:</b> 5G LAN + Wi-Fi 7</div>
+  </div>
+
+  <p class="note">
+    En esta placa base, las conexiones más rápidas dependen directamente de la CPU,
+    mientras que el chipset B860 se encarga del resto de dispositivos de entrada/salida.
+  </p>
+
+  <h2 style="margin-top:16px;">2) Idea clave</h2>
+  <p>
+    El procesador gestiona la memoria RAM DDR5, la tarjeta gráfica PCIe 5.0 y el SSD
+    M.2 Gen5. El chipset actúa como concentrador de puertos USB, SATA, audio, red
+    y ranuras PCIe secundarias.
+  </p>
+</div>
+
+<!-- DIAGRAMA -->
+<div class="card">
+  <h2>3) Diagrama CPU ↔ Chipset</h2>
+
+  <div class="diagram-wrap">
+<svg width="900" height="560" viewBox="0 0 900 560"
+xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/>
+  </marker>
+</defs>
+
+<!-- CPU -->
+<rect x="340" y="60" rx="16" ry="16" width="220" height="90" fill="#1d4ed8"/>
+<text x="450" y="95" text-anchor="middle" fill="#fff" font-weight="800">CPU</text>
+<text x="450" y="120" text-anchor="middle" fill="#eaf2ff" font-size="12">
+Intel Core Ultra (LGA 1851)
+</text>
+
+<!-- RAM -->
+<rect x="340" y="160" rx="14" ry="14" width="220" height="60" fill="#e0f2fe"/>
+<text x="450" y="195" text-anchor="middle" font-size="14" font-weight="800">
+RAM DDR5
+</text>
+<text x="450" y="215" text-anchor="middle" font-size="12">
+Hasta 9200 MHz (OC)
+</text>
+<line x1="450" y1="150" x2="450" y2="160" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+
+<!-- GPU -->
+<rect x="60" y="80" rx="14" ry="14" width="240" height="80" fill="#eef5ff"/>
+<text x="180" y="115" text-anchor="middle" font-weight="800">PCIe 5.0 x16</text>
+<text x="180" y="135" text-anchor="middle" font-size="12">Tarjeta gráfica</text>
+<line x1="300" y1="120" x2="340" y2="120" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+
+<!-- M.2 -->
+<rect x="60" y="170" rx="14" ry="14" width="240" height="80" fill="#fff7ed"/>
+<text x="180" y="205" text-anchor="middle" font-weight="800">M.2 PCIe Gen5</text>
+<text x="180" y="225" text-anchor="middle" font-size="12">SSD NVMe</text>
+<line x1="300" y1="210" x2="340" y2="210" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+
+<!-- CHIPSET -->
+<rect x="340" y="270" rx="16" ry="16" width="220" height="90" fill="#0ea5e9"/>
+<text x="450" y="305" text-anchor="middle" fill="#fff" font-weight="800">
+Chipset Intel B860 (PCH)
+</text>
+<text x="450" y="330" text-anchor="middle" fill="#eaf2ff" font-size="12">
+USB · SATA · Audio · Red
+</text>
+<line x1="450" y1="220" x2="450" y2="270" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+
+<!-- I/O -->
+<rect x="600" y="270" rx="14" ry="14" width="260" height="90" fill="#f0fdf4"/>
+<text x="730" y="305" text-anchor="middle" font-weight="800">
+USB / SATA / LAN / Audio
+</text>
+<text x="730" y="325" text-anchor="middle" font-size="12">
+Incluye Wi-Fi 7 y 5G LAN
+</text>
+<line x1="560" y1="315" x2="600" y2="315" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+
+</svg>
+  </div>
+
+  <div class="legend">
+    <span><i class="dot d-cpu"></i>CPU</span>
+    <span><i class="dot d-storage"></i>RAM / M.2</span>
+    <span><i class="dot d-chip"></i>Chipset</span>
+    <span><i class="dot d-io"></i>Entradas/Salidas</span>
+  </div>
+
+  <p class="note">
+    El diagrama representa de forma simplificada la arquitectura real de la
+    MSI MAG B860 TOMAHAWK WIFI y cómo se reparten las conexiones entre CPU y chipset.
+  </p>
+</div>
+
+</div>
+</div>
+</body>
+</html>

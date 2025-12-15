@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actividad 7 – Comparar dos placas base AMD (Zen 5)</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a30;
+      --panel2:#0c162a;
+      --line:rgba(148,163,184,.18);
+      --text:#e5e7eb;
+      --muted:#a7b0c0;
+      --accent:#22c55e;
+      --accent2:#60a5fa;
+      --warn:#f59e0b;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(1000px 600px at 15% 10%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(34,197,94,.14), transparent 55%),
+        radial-gradient(900px 700px at 55% 95%, rgba(245,158,11,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      padding:28px 14px;
+    }
+
+    .wrap{max-width:1100px;margin:0 auto}
+
+    /* Header */
+    header{
+      background: linear-gradient(135deg, rgba(96,165,250,.18), rgba(34,197,94,.12));
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:22px 22px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.35);
+      margin-bottom:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    header:after{
+      content:"";
+      position:absolute; inset:-40px -40px auto auto;
+      width:260px; height:260px;
+      background: radial-gradient(circle, rgba(34,197,94,.22), transparent 60%);
+      transform: rotate(25deg);
+      pointer-events:none;
+    }
+    .kicker{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(15,26,48,.65);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#dbeafe;
+      margin-bottom:10px;
+    }
+    h1{
+      margin:0 0 8px 0;
+      font-size:30px;
+      line-height:1.15;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      max-width: 70ch;
+    }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:stretch;
+      margin-top:16px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px 16px;
+      box-shadow: 0 16px 38px rgba(0,0,0,.28);
+    }
+
+    .brandRow{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      margin-bottom:8px;
+    }
+    .title{
+      margin:0;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(12,22,42,.65);
+      font-size:12px;
+      color:#e2e8f0;
+      white-space:nowrap;
+    }
+    .dot{
+      width:9px;height:9px;border-radius:50%;
+      background: var(--accent2);
+      box-shadow:0 0 0 4px rgba(96,165,250,.15);
+    }
+
+    .kv{
+      display:grid;
+      grid-template-columns: 170px 1fr;
+      gap:8px 10px;
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+      font-size:14px;
+    }
+    .k{color:#cbd5e1}
+    .v{color:#f1f5f9}
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-block;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(15,26,48,.55);
+      color:#e2e8f0;
+      margin-right:6px;
+      margin-top:6px;
+    }
+
+    /* Comparison table */
+    .section{
+      margin-top:16px;
+      background: rgba(15,26,48,.55);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px 16px;
+      box-shadow: 0 16px 38px rgba(0,0,0,.22);
+    }
+    .section h2{
+      margin:0 0 10px 0;
+      font-size:18px;
+      color:#dbeafe;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(12,22,42,.65);
+    }
+    th, td{
+      padding:12px 12px;
+      text-align:left;
+      vertical-align:top;
+      border-bottom:1px solid rgba(148,163,184,.14);
+      font-size:14px;
+    }
+    th{
+      background: rgba(96,165,250,.10);
+      color:#eaf2ff;
+      font-weight:700;
+    }
+    tr:last-child td{border-bottom:none}
+
+    /* Decision */
+    .decision{
+      margin-top:16px;
+      border-radius:18px;
+      padding:16px 16px;
+      border:1px solid rgba(34,197,94,.28);
+      background: linear-gradient(135deg, rgba(34,197,94,.14), rgba(96,165,250,.10));
+      box-shadow: 0 16px 38px rgba(0,0,0,.22);
+    }
+    .decision h2{
+      margin:0 0 8px 0;
+      font-size:18px;
+      color:#dcfce7;
+    }
+    .decision p{margin:0;color:#e5e7eb;line-height:1.6}
+
+    /* Footnote */
+    .foot{
+      margin-top:14px;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .src{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(12,22,42,.55);
+      margin-right:6px;
+      margin-top:6px;
+      color:#cbd5e1;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="kicker">Actividad 7</span>
+    <h1>Comparar dos placas base AMD modernas (Zen 5 / Ryzen 9000)</h1>
+    <p class="sub">
+      Se comparan dos placas base AMD de fabricantes distintos, ambas con el mismo chipset, compatibles con Ryzen 9000 (Zen 5),
+      indicando fabricante, modelo, chipset, precio y una decisión final de compra.
+    </p>
+  </header>
+
+  <div class="grid">
+
+    <!-- MSI -->
+    <article class="card">
+      <div class="brandRow">
+        <div>
+          <h3 class="title">MSI – MAG B850 TOMAHAWK MAX WIFI</h3>
+          <div class="muted">Placa base AM5 orientada a rendimiento y gaming</div>
+        </div>
+        <div class="chip"><span class="dot"></span>Chipset: AMD B850</div>
+      </div>
+
+      <div class="kv">
+        <div class="k">Fabricante</div><div class="v">MSI</div>
+        <div class="k">Modelo</div><div class="v">MAG B850 TOMAHAWK MAX WIFI</div>
+        <div class="k">Chipset</div><div class="v">AMD B850</div>
+        <div class="k">Compatibilidad CPU</div>
+        <div class="v">
+          AMD Ryzen 9000 / 8000 / 7000 (Socket AM5)
+        </div>
+        <div class="k">Precio (orientativo)</div>
+        <div class="v">
+          Desde <b>≈ 261,89 €</b> (puede variar por tienda)
+        </div>
+      </div>
+
+      <div style="margin-top:10px;">
+        <span class="pill">AM5</span>
+        <span class="pill">Ryzen 9000</span>
+        <span class="pill">B850</span>
+      </div>
+    </article>
+
+    <!-- GIGABYTE -->
+    <article class="card">
+      <div class="brandRow">
+        <div>
+          <h3 class="title">Gigabyte – B850 EAGLE WIFI6E</h3>
+          <div class="muted">Placa base AM5 equilibrada en precio/prestaciones</div>
+        </div>
+        <div class="chip"><span class="dot"></span>Chipset: AMD B850</div>
+      </div>
+
+      <div class="kv">
+        <div class="k">Fabricante</div><div class="v">Gigabyte</div>
+        <div class="k">Modelo</div><div class="v">B850 EAGLE WIFI6E</div>
+        <div class="k">Chipset</div><div class="v">AMD B850</div>
+        <div class="k">Compatibilidad CPU</div>
+        <div class="v">
+          AMD Ryzen 9000 / 8000 / 7000 (Socket AM5)
+        </div>
+        <div class="k">Precio (orientativo)</div>
+        <div class="v">
+          Desde <b>≈ 192,77 €</b> (puede variar por tienda)
+        </div>
+      </div>
+
+      <div style="margin-top:10px;">
+        <span class="pill">AM5</span>
+        <span class="pill">Ryzen 9000</span>
+        <span class="pill">WiFi 6E</span>
+      </div>
+    </article>
+
+  </div>
+
+  <section class="section">
+    <h2>Comparativa rápida</h2>
+    <table>
+      <tr>
+        <th>Campo</th>
+        <th>MSI MAG B850 TOMAHAWK MAX WIFI</th>
+        <th>Gigabyte B850 EAGLE WIFI6E</th>
+      </tr>
+      <tr>
+        <td><b>Fabricante</b></td>
+        <td>MSI</td>
+        <td>Gigabyte</td>
+      </tr>
+      <tr>
+        <td><b>Modelo</b></td>
+        <td>MAG B850 TOMAHAWK MAX WIFI</td>
+        <td>B850 EAGLE WIFI6E</td>
+      </tr>
+      <tr>
+        <td><b>Chipset</b></td>
+        <td>AMD B850</td>
+        <td>AMD B850</td>
+      </tr>
+      <tr>
+        <td><b>CPU compatibles</b></td>
+        <td>Ryzen 9000 / 8000 / 7000 (AM5)</td>
+        <td>Ryzen 9000 / 8000 / 7000 (AM5)</td>
+      </tr>
+      <tr>
+        <td><b>Precio</b></td>
+        <td>Desde ≈ 261,89 €</td>
+        <td>Desde ≈ 192,77 €</td>
+      </tr>
+    </table>
+
+    <div class="foot">
+      <span class="src">Compatibilidad MSI: web oficial</span>
+      <span class="src">Compatibilidad Gigabyte: web oficial</span>
+      <span class="src">Precios: comparador (desde)</span>
+      <div style="margin-top:6px;">
+        Nota: “Desde” significa el precio mínimo localizado en el momento de consulta; puede variar según stock, tienda y envío.
+      </div>
+    </div>
+  </section>
+
+  <section class="decision">
+    <h2>¿Cuál me compraría y por qué?</h2>
+    <p>
+      Como juego mucho a videojuegos, me decantaría por la <b>MSI MAG B850 TOMAHAWK MAX WIFI</b>,
+      porque está más orientada a un montaje “gaming” y a mantener el sistema estable con cargas altas
+      (CPU/GPU/SSD), aunque su precio suele ser más alto. Si el objetivo fuera ahorrar lo máximo posible
+      manteniendo compatibilidad con Ryzen 9000, la Gigabyte es una opción muy competitiva.
+    </p>
+  </section>
+
+</div>
+
+<!-- Fuentes (para ti, no se ven como enlaces si lo imprimes) -->
+<!-- MSI compatibilidad Ryzen 9000/8000/7000: https://es.msi.com/Motherboard/MAG-B850-TOMAHAWK-MAX-WIFI -->
+<!-- Gigabyte compatibilidad Ryzen 9000/8000/7000: https://www.gigabyte.com/es/Motherboard/B850-EAGLE-WIFI6E-rev-1x -->
+<!-- Precio MSI "desde": https://www.idealo.es/precios/205554626/msi-mag-b850-tomahawk-max-wifi.html -->
+<!-- Precio Gigabyte "desde": https://www.idealo.es/precios/205568097/gigabyte-b850-eagle-wifi6e.html -->
+
+</body>
+</html>

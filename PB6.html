@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actividad 6 – Comparativa Chipsets AMD e Intel</title>
+
+<style>
+    body{
+        margin:0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background:#f6f7fb;
+        color:#1e293b;
+        padding:30px 16px;
+    }
+
+    .container{
+        max-width:1100px;
+        margin:0 auto;
+    }
+
+    header{
+        background:#0f172a;
+        color:#ffffff;
+        padding:28px;
+        border-radius:16px;
+        margin-bottom:30px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    header h1{
+        margin:0 0 10px 0;
+        font-size:32px;
+    }
+
+    header p{
+        margin:0;
+        font-size:16px;
+        line-height:1.6;
+        color:#cbd5f5;
+    }
+
+    .section{
+        background:#ffffff;
+        border-radius:14px;
+        padding:22px 24px;
+        margin-bottom:24px;
+        box-shadow:0 8px 22px rgba(15,23,42,0.08);
+        border-left:6px solid #3b82f6;
+    }
+
+    .section h2{
+        margin-top:0;
+        margin-bottom:14px;
+        color:#1e40af;
+        font-size:24px;
+    }
+
+    .chipset-grid{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:20px;
+    }
+
+    .chipset-card{
+        background:#f8fafc;
+        border-radius:12px;
+        padding:18px 20px;
+        border:1px solid #e2e8f0;
+    }
+
+    .chipset-card h3{
+        margin-top:0;
+        color:#0f172a;
+        font-size:20px;
+    }
+
+    .chipset-card ul{
+        margin:0;
+        padding-left:18px;
+        font-size:15px;
+        line-height:1.6;
+    }
+
+    .chipset-card ul li{
+        margin-bottom:6px;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:10px;
+        font-size:15px;
+    }
+
+    table th{
+        background:#1e40af;
+        color:white;
+        padding:10px;
+        text-align:left;
+    }
+
+    table td{
+        padding:10px;
+        border-bottom:1px solid #e5e7eb;
+        background:#f9fafb;
+    }
+
+    .note{
+        margin-top:14px;
+        font-size:14px;
+        color:#334155;
+        background:#eef2ff;
+        padding:14px 16px;
+        border-radius:10px;
+        border-left:4px solid #6366f1;
+    }
+
+    @media(max-width:850px){
+        .chipset-grid{
+            grid-template-columns:1fr;
+        }
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+    <h1>Actividad 6 – Comparación de Chipsets AMD e Intel</h1>
+    <p>
+        En esta actividad se comparan dos chipsets actuales, uno de AMD y otro de Intel,
+        indicando su tipo de arquitectura, soporte PCI Express, procesadores compatibles
+        y nivel de complejidad.
+    </p>
+</header>
+
+<div class="section">
+    <h2>1. Chipsets seleccionados</h2>
+
+    <div class="chipset-grid">
+
+        <!-- AMD -->
+        <div class="chipset-card">
+            <h3>Chipset AMD X670</h3>
+            <ul>
+                <li><b>Fabricante:</b> AMD</li>
+                <li><b>Tipo de chipset:</b> PCH moderno (no usa puente Norte–Sur)</li>
+                <li><b>Socket:</b> AM5</li>
+                <li><b>Procesadores compatibles:</b> AMD Ryzen series 7000 / 8000 / 9000</li>
+                <li><b>PCI Express:</b> PCIe 5.0 (NVMe y, según placa, GPU)</li>
+            </ul>
+        </div>
+
+        <!-- Intel -->
+        <div class="chipset-card">
+            <h3>Chipset Intel Z790</h3>
+            <ul>
+                <li><b>Fabricante:</b> Intel</li>
+                <li><b>Tipo de chipset:</b> PCH (Platform Controller Hub)</li>
+                <li><b>Socket:</b> LGA 1700</li>
+                <li><b>Procesadores compatibles:</b> Intel Core 12ª, 13ª y 14ª generación</li>
+                <li><b>PCI Express:</b> PCIe 5.0 (GPU) + PCIe 4.0 adicional</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="section">
+    <h2>2. Tabla comparativa</h2>
+
+    <table>
+        <tr>
+            <th>Característica</th>
+            <th>AMD X670</th>
+            <th>Intel Z790</th>
+        </tr>
+        <tr>
+            <td>Tipo de chipset</td>
+            <td>PCH moderno</td>
+            <td>PCH (Intel)</td>
+        </tr>
+        <tr>
+            <td>Socket</td>
+            <td>AM5</td>
+            <td>LGA 1700</td>
+        </tr>
+        <tr>
+            <td>Procesadores compatibles</td>
+            <td>Ryzen 7000 / 8000 / 9000</td>
+            <td>Core 12ª / 13ª / 14ª gen</td>
+        </tr>
+        <tr>
+            <td>Generación PCIe</td>
+            <td>PCIe 5.0</td>
+            <td>PCIe 5.0 + 4.0</td>
+        </tr>
+        <tr>
+            <td>Enfoque</td>
+            <td>Alto rendimiento y expansión</td>
+            <td>Gama alta y overclocking</td>
+        </tr>
+    </table>
+</div>
+
+<div class="section">
+    <h2>3.Valoración</h2>
+
+    <p>
+        Tanto el chipset <b>AMD X670</b> como el <b>Intel Z790</b> se utilizan en placas base modernas
+        y funcionan como un <b>centro de conexiones</b> entre el procesador y el resto de componentes
+        del ordenador.
+    </p>
+
+    <p>
+        En ambos casos, las tareas más rápidas, como la memoria RAM o la tarjeta gráfica,
+        dependen directamente del procesador. El chipset se encarga de gestionar los puertos USB,
+        el almacenamiento SATA, el audio, la red y las ranuras PCIe secundarias.
+    </p>
+
+
+</div>
+
+</div>
+</body>
+</html>

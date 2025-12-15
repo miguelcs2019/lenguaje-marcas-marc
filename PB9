@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actividad 9 – Comparativa ASUS PRIME H570-PLUS vs H570M-PLUS</title>
+
+  <style>
+    :root{
+      --bg0:#070a16;
+      --bg1:#0b1430;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --line: rgba(148,163,184,.18);
+      --text: #e5e7eb;
+      --muted:#a6b0c4;
+      --accent:#60a5fa;
+      --good:#22c55e;
+      --warn:#f59e0b;
+      --vio:#a78bfa;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      padding: 28px 14px;
+      background:
+        radial-gradient(1100px 650px at 15% 18%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 28%, rgba(34,197,94,.12), transparent 60%),
+        radial-gradient(900px 700px at 55% 92%, rgba(167,139,250,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    /* scanlines suaves */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.03),
+        rgba(255,255,255,.03) 1px,
+        transparent 1px,
+        transparent 7px
+      );
+      pointer-events:none;
+      mix-blend-mode: overlay;
+      opacity:.22;
+    }
+
+    .wrap{max-width:1150px;margin:0 auto}
+
+    header{
+      position:relative;
+      border-radius: 22px;
+      padding: 22px 22px;
+      background: linear-gradient(135deg, rgba(96,165,250,.14), rgba(34,197,94,.10));
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 46px rgba(0,0,0,.35);
+      overflow:hidden;
+      margin-bottom:16px;
+    }
+    header:after{
+      content:"";
+      position:absolute; inset:-50px -90px auto auto;
+      width:360px;height:360px;
+      background: radial-gradient(circle, rgba(96,165,250,.22), transparent 62%);
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(6,10,24,.55);
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:#dbeafe;
+      margin-bottom:10px;
+    }
+    .kdot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(96,165,250,.15);
+    }
+
+    h1{margin:0 0 8px 0;font-size:32px;line-height:1.12}
+    .sub{
+      margin:0;
+      color: var(--muted);
+      line-height:1.65;
+      max-width: 95ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 16px;
+      box-shadow: 0 16px 38px rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+    }
+
+    .card h2{
+      margin:0 0 10px 0;
+      font-size:18px;
+      color:#eaf2ff;
+      letter-spacing:.02em;
+    }
+
+    p{margin:8px 0; line-height:1.65; color: var(--text); text-align:justify}
+    .muted{color: var(--muted)}
+    .tiny{font-size:12px;color: var(--muted)}
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(6,10,24,.55);
+      border: 1px solid rgba(255,255,255,.16);
+      color:#dbeafe;
+      font-size:12px;
+      margin: 6px 8px 0 0;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(96,165,250,.10);
+    }
+    .dot.good{background: var(--good); box-shadow:0 0 0 6px rgba(34,197,94,.10)}
+    .dot.warn{background: var(--warn); box-shadow:0 0 0 6px rgba(245,158,11,.10)}
+    .dot.vio{background: var(--vio); box-shadow:0 0 0 6px rgba(167,139,250,.10)}
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,.16);
+      background: rgba(6,10,24,.45);
+    }
+    th,td{
+      padding:12px 12px;
+      font-size:14px;
+      border-bottom:1px solid rgba(148,163,184,.14);
+      vertical-align:top;
+      text-align:left;
+    }
+    th{
+      background: rgba(96,165,250,.12);
+      color:#eaf2ff;
+      font-weight:700;
+    }
+    tr:last-child td{border-bottom:none}
+
+    .callout{
+      margin-top:12px;
+      border-radius:14px;
+      padding:12px 12px;
+      border:1px solid rgba(96,165,250,.22);
+      background: linear-gradient(135deg, rgba(96,165,250,.12), rgba(34,197,94,.08));
+      color:#e5e7eb;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .warnbox{
+      margin-top:12px;
+      border-radius:14px;
+      padding:12px 12px;
+      border:1px solid rgba(245,158,11,.22);
+      background: linear-gradient(135deg, rgba(245,158,11,.10), rgba(96,165,250,.06));
+      color:#e5e7eb;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .footer{
+      margin-top:14px;
+      font-size:12px;
+      color: var(--muted);
+      line-height:1.55;
+      border-top: 1px solid rgba(148,163,184,.14);
+      padding-top: 12px;
+    }
+
+    /* mini “diagrama” visual (sin inventar datos: solo ilustra ATX vs mATX) */
+    .formfactor{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+    .ffbox{
+      border-radius:16px;
+      border:1px solid rgba(148,163,184,.16);
+      background: rgba(6,10,24,.45);
+      padding:12px;
+      position:relative;
+      overflow:hidden;
+    }
+    .ffbox h3{
+      margin:0 0 8px 0;
+      font-size:14px;
+      color:#eaf2ff;
+    }
+    .board{
+      width:100%;
+      height:140px;
+      border-radius:14px;
+      border:1px solid rgba(148,163,184,.18);
+      background:
+        radial-gradient(240px 130px at 25% 35%, rgba(96,165,250,.14), transparent 60%),
+        radial-gradient(260px 150px at 80% 55%, rgba(34,197,94,.10), transparent 60%),
+        rgba(255,255,255,.05);
+      position:relative;
+    }
+    .slot{
+      position:absolute;
+      left:14px;
+      right:14px;
+      height:10px;
+      border-radius:8px;
+      background: rgba(226,232,240,.20);
+      border:1px solid rgba(226,232,240,.18);
+    }
+    .slot.s1{top:18px}
+    .slot.s2{top:38px}
+    .slot.s3{top:58px}
+    .slot.s4{top:78px}
+    .slot.s5{top:98px}
+    .slot.s6{top:118px}
+
+    .label{
+      margin-top:8px;
+      font-size:12px;
+      color: var(--muted);
+      line-height:1.5;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker"><span class="kdot"></span>Actividad 9 · ASUS PRIME · H570</div>
+    <h1>Comparativa: ASUS PRIME H570-PLUS vs ASUS PRIME H570M-PLUS</h1>
+    <p class="sub">
+      En esta actividad comparo dos placas con <b>chipset Intel H570</b> y <b>socket LGA1200</b>.
+      La diferencia más importante es el <b>tamaño</b> (ATX vs Micro-ATX) y la <b>cantidad de expansión</b>
+      (ranuras PCIe y conectividad). Cuando en la placa ATX no hay datos exactos en el texto aportado, lo marco como
+      <b>“No especificado”</b> para no inventar nada.
+    </p>
+  </header>
+
+  <div class="grid">
+
+    <section class="card">
+      <h2>1) Placas que se comparan</h2>
+
+      <div class="pill"><span class="dot good"></span><b>ASUS PRIME H570-PLUS</b> (ATX)</div>
+      <div class="pill"><span class="dot vio"></span><b>ASUS PRIME H570M-PLUS</b> (Micro-ATX)</div>
+
+      <p class="muted tiny">
+        Las dos usan el chipset <b>H570</b> y el socket <b>LGA1200</b>, por eso tiene sentido compararlas.
+      </p>
+
+      <div class="formfactor">
+        <div class="ffbox">
+          <h3>H570-PLUS (ATX) – Idea visual</h3>
+          <div class="board">
+            <div class="slot s1"></div><div class="slot s2"></div><div class="slot s3"></div>
+            <div class="slot s4"></div><div class="slot s5"></div><div class="slot s6"></div>
+          </div>
+          <div class="label">
+            ATX suele dar <b>más espacio</b> para ranuras y mejor distribución.
+            (Este dibujo es ilustrativo, no es un esquema real de la placa.)
+          </div>
+        </div>
+
+        <div class="ffbox">
+          <h3>H570M-PLUS (Micro-ATX) – Idea visual</h3>
+          <div class="board" style="height:140px; max-width: 92%; margin:0 auto;">
+            <div class="slot s1"></div><div class="slot s2"></div><div class="slot s3"></div>
+            <div class="slot s4" style="opacity:.65"></div>
+          </div>
+          <div class="label">
+            Micro-ATX es <b>más compacta</b> y normalmente tiene <b>menos expansión</b>.
+            (Ilustración, no inventa números de ranuras.)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2) Resumen rápido (lo más importante)</h2>
+
+      <table>
+        <tr>
+          <th>Aspecto</th>
+          <th>H570-PLUS (ATX)</th>
+          <th>H570M-PLUS (Micro-ATX)</th>
+        </tr>
+        <tr>
+          <td><b>Tamaño</b></td>
+          <td>ATX</td>
+          <td>Micro-ATX</td>
+        </tr>
+        <tr>
+          <td><b>Chipset</b></td>
+          <td>H570</td>
+          <td>H570</td>
+        </tr>
+        <tr>
+          <td><b>Socket / CPU</b></td>
+          <td>LGA1200 (10ª/11ª Gen Intel Core, Pentium Gold, Celeron)</td>
+          <td>LGA1200 (10ª/11ª Gen Intel Core, Pentium Gold, Celeron)</td>
+        </tr>
+        <tr>
+          <td><b>Memoria</b></td>
+          <td>No especificado en el texto aportado</td>
+          <td>DDR4 Dual Channel, hasta 128GB, hasta 4600 (OC), XMP, OptiMem</td>
+        </tr>
+        <tr>
+          <td><b>Almacenamiento</b></td>
+          <td>No especificado en el texto aportado</td>
+          <td>2× M.2 (1 ligado a CPU con PCIe 4.0 x4 solo 11ª Gen) + 6× SATA</td>
+        </tr>
+        <tr>
+          <td><b>Expansión PCIe</b></td>
+          <td>No especificado en el texto aportado</td>
+          <td>1× PCIe 4.0/3.0 x16 + 1× PCIe 3.0 x16 (x4) + 1× PCIe 3.0 x1</td>
+        </tr>
+        <tr>
+          <td><b>USB traseros</b></td>
+          <td>No especificado con detalle en el texto aportado</td>
+          <td>Total 6: 2× USB 3.2 Gen2 (A+C) + 2× USB 3.2 Gen1 + 2× USB 2.0</td>
+        </tr>
+        <tr>
+          <td><b>Red</b></td>
+          <td>No especificado en el texto aportado</td>
+          <td>Intel I219-V 1Gb</td>
+        </tr>
+        <tr>
+          <td><b>Audio</b></td>
+          <td>No especificado en el texto aportado</td>
+          <td>Realtek ALC897 (7.1), Audio Shielding y condensadores</td>
+        </tr>
+      </table>
+
+      <div class="warnbox">
+        <b>Importante:</b> En la información que me has pegado, la placa <b>H570M-PLUS</b> viene con especificaciones
+        completas. La <b>H570-PLUS</b> aparece “por encima” (características generales), pero faltan números exactos
+        de ranuras/puertos en el texto. Por eso no los pongo.
+      </div>
+    </section>
+
+  </div>
+
+  <div class="grid">
+
+    <section class="card">
+      <h2>3) Diferencias por puntos (explicado fácil)</h2>
+
+      <p>
+        <b>Tamaño:</b> La H570-PLUS al ser <b>ATX</b> suele ser mejor si quieres una torre “normal” con más espacio.
+        La H570M-PLUS al ser <b>Micro-ATX</b> es más pequeña y va bien si quieres una caja compacta.
+      </p>
+
+      <p>
+        <b>Ranuras PCIe (expansión):</b> Según los datos, la H570M-PLUS tiene 1 ranura principal x16 y otras adicionales.
+        En general, cuando una placa es ATX suele ofrecer más opciones de expansión, pero en tu texto no aparecen los números
+        exactos de la H570-PLUS, así que no los comparo con cifras.
+      </p>
+
+      <p>
+        <b>USB y conectividad:</b> La H570M-PLUS trae un conjunto completo con USB Type-C trasero y varios USB 3.2.
+        De la H570-PLUS no tenemos el detalle exacto en tu texto, así que lo dejo como “no especificado”.
+      </p>
+
+      <p>
+        <b>Almacenamiento:</b> La H570M-PLUS incluye 2 M.2 y 6 SATA, con la particularidad de que el M.2 ligado al CPU
+        solo funciona con PCIe 4.0 si el procesador es de 11ª gen (si no, ese slot se desactiva).
+      </p>
+
+      <p>
+        <b>VRM y disipación:</b> En tu texto sí aparece que hay <b>disipador de VRM</b> y soluciones térmicas (VRM/M.2/PCH).
+        La idea que puedes explicar como alumno es: “si la placa tiene mejor disipación, las temperaturas se controlan mejor”.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>4) ¿Cuál me compraría y por qué?</h2>
+
+      <div class="callout">
+        <b>Mi elección (en general):</b> me quedaría con la <b>ASUS PRIME H570-PLUS (ATX)</b> si mi prioridad es
+        tener un PC con más margen para ampliar (más espacio, más comodidad de montaje y normalmente más expansión).
+      </div>
+
+      <p>
+        <b>Pero</b> si quiero una caja más pequeña o busco algo más compacto, la <b>H570M-PLUS</b> es muy buena porque
+        ya trae características modernas como PCIe 4.0 en la ranura principal (con CPU de 11ª gen), doble M.2, y USB Type-C.
+      </p>
+
+      <div class="warnbox">
+        <b>Nota:</b> como en el texto que has pegado faltan datos numéricos completos de la H570-PLUS,
+        mi recomendación final es por “perfil de uso” (ATX = más margen) y no por cifras exactas de puertos/ranuras.
+      </div>
+    </section>
+
+  </div>
+
+  <div class="footer">
+    <b>Fuentes / datos usados:</b><br>
+    – Especificaciones pegadas por ti en el chat para <b>ASUS PRIME H570M-PLUS</b> (CPU, chipset, RAM, PCIe, M.2/SATA, USB, audio, I/O, BIOS, etc.).<br>
+    – Texto pegado por ti para la otra placa (características generales tipo: LGA1200, H570, refrigeración, PCIe 4.0, Dual M.2, 1Gb, USB 3.2 Gen2 Type-C y Thunderbolt header, 5X Protection III).<br><br>
+    Si me pegas el bloque de especificaciones completo de la <b>ASUS PRIME H570-PLUS</b> (como has hecho con la H570M-PLUS),
+    te lo dejo “perfecto” con números exactos y una tabla 100% cerrada.
+  </div>
+
+</div>
+</body>
+</html>

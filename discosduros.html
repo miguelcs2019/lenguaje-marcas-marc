@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Comparativa de Discos Duros por Conector (IDE, SATA, SCSI, SAS)</title>
+
+<style>
+  :root{
+    --bg1:#0f172a;
+    --bg2:#1e293b;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --border: rgba(255,255,255,.16);
+    --text:#f1f5f9;
+    --muted:#cbd5e1;
+    --muted2:#94a3b8;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    padding:40px 20px;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,var(--bg1),var(--bg2));
+    color: var(--text);
+  }
+
+  .wrap{
+    max-width: 1250px;
+    margin: 0 auto;
+  }
+
+  h1{
+    font-size: 22px;
+    margin: 0 0 10px 0;
+    letter-spacing: .2px;
+  }
+
+  p{
+    margin: 0 0 14px 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 1100px;
+  }
+
+  .card{
+    margin-top: 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .meta{
+    padding: 12px 14px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    align-items:center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,.04);
+  }
+
+  .pill{
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    padding: 8px 10px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .pill b{ color: var(--text); font-weight: 700; }
+
+  .table-wrap{
+    overflow-x:auto;
+  }
+
+  table{
+    width:100%;
+    border-collapse: collapse;
+    min-width: 1250px;
+  }
+
+  thead th{
+    padding: 14px;
+    font-size: 12px;
+    text-align:left;
+    color: #e5e7eb;
+    background: var(--card2);
+    border-bottom: 1px solid var(--border);
+    vertical-align: bottom;
+  }
+
+  tbody td{
+    padding: 14px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    vertical-align: top;
+    line-height: 1.35;
+  }
+
+  tbody tr:hover{
+    background: rgba(255,255,255,0.05);
+  }
+
+  .tag{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background: rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.20);
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .k{
+    display:block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--muted2);
+  }
+
+  .note{
+    padding: 12px 14px 14px;
+    color: var(--muted2);
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  h2{
+    margin: 22px 0 10px 0;
+    font-size: 16px;
+  }
+
+  .bib{
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 14px;
+    padding: 12px 14px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .bib ol{
+    margin: 8px 0 0 18px;
+    padding: 0;
+  }
+
+  .bib li{
+    margin: 8px 0;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <h1>Comparativa de discos duros segun tipo de conector (IDE, SATA, SCSI, SAS)</h1>
+  <p>
+    Tabla tecnica comparativa de discos duros HDD clasificados por tipo de conector. Se incluyen interfaz fisico y version,
+    velocidad maxima teorica del bus, velocidades secuenciales publicadas por fabricante (cuando aplica), interfaz logico,
+    metodo de grabacion, dimensiones, garantia y capacidad.
+  </p>
+
+  <section class="card">
+    <div class="meta">
+      <div class="pill"><b>IDE/PATA</b> Ultra ATA/100</div>
+      <div class="pill"><b>SATA</b> SATA 6 Gb/s</div>
+      <div class="pill"><b>SCSI</b> Ultra320 (paralelo)</div>
+      <div class="pill"><b>SAS</b> SAS 12 Gb/s</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fabricante</th>
+            <th>Modelo</th>
+            <th>Conector</th>
+            <th>Interfaz fisico (version)</th>
+            <th>Velocidad maxima teorica</th>
+            <th>Lectura secuencial</th>
+            <th>Escritura secuencial</th>
+            <th>Interfaz logico</th>
+            <th>Metodo de grabacion</th>
+            <th>Tamaño fisico (ancho x largo)</th>
+            <th>Garantia</th>
+            <th>Capacidad</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- SATA -->
+          <tr>
+            <td>Western Digital</td>
+            <td>
+              <b>WD10EZEX (WD Blue 3.5&quot; PC HDD)</b>
+              <span class="k">SATA 6 Gb/s, CMR, 7200 rpm, cache 64 MB</span>
+            </td>
+            <td><span class="tag">SATA</span></td>
+            <td>SATA 6 Gb/s</td>
+            <td>6 Gb/s (≈ 600 MB/s)</td>
+            <td>150 MB/s (transferencia interna maxima)</td>
+            <td>150 MB/s</td>
+            <td>ATA</td>
+            <td>CMR</td>
+            <td>101,6 mm x 147 mm</td>
+            <td>2 años</td>
+            <td>1 TB</td>
+          </tr>
+
+          <!-- IDE / PATA -->
+          <tr>
+            <td>Seagate</td>
+            <td>
+              <b>Barracuda 7200.10 (ST3250820A)</b>
+              <span class="k">PATA/IDE, 7200 rpm, perpendicular recording, garantia 5 años</span>
+            </td>
+            <td><span class="tag">IDE</span></td>
+            <td>Ultra ATA/100 (PATA)</td>
+            <td>100 MB/s</td>
+            <td>100 MB/s (Transfer Rate, Max Ext)</td>
+            <td>100 MB/s</td>
+            <td>ATA</td>
+            <td>Perpendicular Recording</td>
+            <td>101,6 mm x 146,99 mm</td>
+            <td>5 años</td>
+            <td>0,25 TB</td>
+          </tr>
+
+          <!-- SCSI -->
+          <tr>
+            <td>Seagate</td>
+            <td>
+              <b>Cheetah 15K.5 (ST3300655LC)</b>
+              <span class="k">Ultra320 SCSI, 15K rpm, perpendicular recording, sustained hasta 125 MB/s</span>
+            </td>
+            <td><span class="tag">SCSI</span></td>
+            <td>Ultra320 SCSI (paralelo)</td>
+            <td>320 MB/s</td>
+            <td>125 MB/s (Sustained)</td>
+            <td>125 MB/s</td>
+            <td>SCSI</td>
+            <td>Perpendicular Recording</td>
+            <td>101,6 mm x 146,05 mm</td>
+            <td>5 años</td>
+            <td>0,30 TB</td>
+          </tr>
+
+          <!-- SAS -->
+          <tr>
+            <td>Seagate</td>
+            <td>
+              <b>Exos X20 SAS (ST20000NM002D)</b>
+              <span class="k">SAS 12 Gb/s, CMR, 7200 rpm, max sustained OD 285 MB/s</span>
+            </td>
+            <td><span class="tag">SAS</span></td>
+            <td>SAS 12 Gb/s</td>
+            <td>12 Gb/s (≈ 1200 MB/s)</td>
+            <td>285 MB/s (Max Sustained Transfer Rate OD)</td>
+            <td>285 MB/s</td>
+            <td>SCSI</td>
+            <td>CMR</td>
+            <td>101,85 mm x 147 mm</td>
+            <td>5 años</td>
+            <td>20 TB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <b>Nota tecnica:</b> La “velocidad maxima teorica” corresponde al enlace/interfaz fisico (bus).
+      Las velocidades secuenciales son las publicadas por el fabricante (p. ej., “transferencia interna maxima”, “max ext”, “sustained” u “OD”).
+      Si el fabricante no separa lectura/escritura, se refleja el valor maximo publicado como referencia para ambas.
+    </div>
+  </section>
+
+  <h2>Bibliografia (fuentes de datos)</h2>
+  <div class="bib">
+    <ol>
+      <li>
+        Western Digital. <i>WD Blue 3.5&quot; PC HDD (Disco duro de PC SATA de 3,5 pulgadas WD Blue) — Especificaciones del producto</i>.
+        Datos usados: modelo WD10EZEX, interfaz SATA 6 Gb/s, transferencia interna maxima 150 MB/s, tecnologia de grabacion CMR,
+        dimensiones 101,6 mm x 147 mm, garantia 2 años. 
+      </li>
+      <li>
+        Seagate. <i>Barracuda 7200.10 — Data Sheet</i> (DS1593.5-0706US, June 2007).
+        Datos usados: modelo ST3250820A, interfaz Ultra ATA/100 (PATA), Transfer Rate Max Ext 100 MB/s, perpendicular recording,
+        dimensiones 101,6 mm x 146,99 mm, garantia 5 años.
+      </li>
+      <li>
+        Seagate. <i>Cheetah 15K.5 — Data Sheet</i> (DS1594.4-0712US, December 2007).
+        Datos usados: modelo ST3300655LC, interfaz Ultra320 SCSI (320 MB/s), sustained 73–125 MB/s (se usa 125 MB/s),
+        perpendicular recording, dimensiones 101,6 mm x 146,05 mm, garantia 5 años. 
+      </li>
+      <li>
+        Seagate. <i>Exos X20 — Data Sheet</i> (DS2080-2111GB, November 2021).
+        Datos usados: modelo SAS ST20000NM002D, interfaz SAS 12 Gb/s (12.0/6.0/3.0), Max Sustained Transfer Rate OD 285 MB/s,
+        CMR, dimensiones 101,85 mm x 147 mm, garantia 5 años. 
+      </li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>

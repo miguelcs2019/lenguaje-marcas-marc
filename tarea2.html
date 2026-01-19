@@ -1,92 +1,222 @@
-<section>
-    <div class="etiqueta-ejercicio">Ejercicio 2</div>
-    <h2>Búsqueda de un PPA y comprobación de paquetes disponibles</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea 2 – Repositorios y PPA</title>
 
-    <p>
-        Para este ejercicio se seleccionó el PPA oficial de LibreOffice como repositorio alternativo.
-        El objetivo era identificar un PPA, consultarlo y verificar qué paquetes están disponibles en él.
-        En este caso se utilizó Linux Mint como entorno de trabajo.
-    </p>
+    <style>
+        :root {
+            --c-bg: #0d0d0d;
+            --c-panel: #111;
+            --c-text: #00ff88;
+            --c-accent: #00ff88;
+            --c-soft: #0aff66;
+            --c-border: #0aff66;
+        }
 
-    <h3>1. Acceso al PPA desde Launchpad</h3>
-    <p>
-        En primer lugar, se accedió al siguiente enlace donde se encuentra alojado el PPA de LibreOffice:
-    </p>
+        * {
+            box-sizing: border-box;
+        }
 
-    <div class="cajita">
-        <p><span class="resaltado">URL:</span> https://launchpad.net/~libreoffice/+archive/ubuntu/ppa</p>
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--c-bg);
+            color: var(--c-text);
+            font-family: Consolas, "Courier New", monospace;
+            line-height: 1.5;
+        }
+
+        .contenedor {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .tarjeta {
+            background: var(--c-panel);
+            border: 1px solid var(--c-border);
+            border-radius: 10px;
+            padding: 32px;
+            box-shadow: 0 0 18px rgba(0,255,120,0.25);
+        }
+
+        header.titulo {
+            border-bottom: 1px solid var(--c-border);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+
+        header.titulo h1 {
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+            color: var(--c-accent);
+            text-shadow: 0 0 8px var(--c-accent);
+            text-transform: uppercase;
+        }
+
+        header.titulo p {
+            margin: 4px 0;
+            opacity: 0.85;
+        }
+
+        .datos-alumno {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 30px;
+            font-size: 0.9rem;
+        }
+
+        .datos-alumno span {
+            min-width: 240px;
+            border-bottom: 1px dashed var(--c-text);
+            padding-bottom: 3px;
+        }
+
+        h2 {
+            margin-top: 26px;
+            font-size: 1.25rem;
+            border-left: 4px solid var(--c-accent);
+            padding-left: 10px;
+            text-transform: uppercase;
+            text-shadow: 0 0 6px var(--c-accent);
+        }
+
+        h3 {
+            margin-top: 18px;
+            color: var(--c-soft);
+        }
+
+        .etiqueta-ejercicio {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--c-border);
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            color: var(--c-accent);
+            text-shadow: 0 0 6px var(--c-accent);
+        }
+
+        .cajita {
+            border: 1px solid var(--c-border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            background: rgba(0,255,120,0.05);
+            margin: 8px 0 14px 0;
+            font-size: 0.9rem;
+        }
+
+        .captura {
+            margin: 14px 0;
+        }
+
+        .captura img {
+            width: 100%;
+            border: 1px solid var(--c-border);
+            border-radius: 6px;
+        }
+
+        .pie {
+            font-size: 0.85rem;
+            margin-top: 4px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <div class="tarjeta">
+
+            <!-- HEADER -->
+            <header class="titulo">
+                <h1>Tarea: Repositorios y PPA</h1>
+                <p>Tema 7 – Sistemes Operatius</p>
+                <div class="datos-alumno">
+                    <span>Alumno: ____________________________</span>
+                    <span>Fecha: ____________________________</span>
+                    <span>Módulo: Sistemes Operatius</span>
+                </div>
+            </header>
+
+            <!-- EJERCICIO 2 -->
+            <section>
+                <div class="etiqueta-ejercicio">Ejercicio 2</div>
+                <h2>Búsqueda de un PPA y revisión de paquetes</h2>
+
+                <p>
+                    En este ejercicio se trabajó con el PPA oficial de LibreOffice, que distribuye versiones 
+                    actualizadas para sistemas basados en Ubuntu, incluyendo Linux Mint.
+                </p>
+
+                <h3>1. Acceso al PPA en Launchpad</h3>
+                <p>
+                    Se accedió al PPA mediante navegador para consultar su contenido:
+                </p>
+
+                <div class="cajita">
+                    <code>https://launchpad.net/~libreoffice/+archive/ubuntu/ppa</code>
+                </div>
+
+                <div class="captura">
+                    <img src="media/captura3.png" alt="PPA LibreOffice en Launchpad">
+                    <p class="pie">Captura 1: Visualización del PPA en Launchpad.</p>
+                </div>
+
+                <h3>2. Añadir el PPA desde terminal</h3>
+                <p>
+                    A continuación, se añadió el repositorio al sistema mediante el comando:
+                </p>
+
+                <div class="cajita">
+                    <code>sudo add-apt-repository ppa:libreoffice/ppa</code>
+                </div>
+
+                <div class="captura">
+                    <img src="media/captura4.png" alt="Añadiendo PPA desde terminal">
+                    <p class="pie">Captura 2: Incorporación del PPA a Linux Mint.</p>
+                </div>
+
+                <h3>3. Actualizar la caché del sistema</h3>
+                <p>
+                    Para que el sistema reconozca los nuevos paquetes, se ejecutó:
+                </p>
+
+                <div class="cajita">
+                    <code>sudo apt update</code>
+                </div>
+
+                <div class="captura">
+                    <img src="media/captura5.png" alt="Actualización de la caché APT">
+                    <p class="pie">Captura 3: Descarga de información desde el PPA.</p>
+                </div>
+
+                <h3>4. Consultar los paquetes ofrecidos</h3>
+                <p>
+                    Finalmente, se realizó una búsqueda de los paquetes disponibles mediante:
+                </p>
+
+                <div class="cajita">
+                    <code>apt search libreoffice</code>
+                </div>
+
+                <div class="captura">
+                    <img src="media/captura6.png" alt="Listado paquetes LibreOffice">
+                    <p class="pie">Captura 4: Listado de paquetes del PPA.</p>
+                </div>
+
+                <h3>Conclusión</h3>
+                <p>
+                    Se ha localizado un PPA válido, se ha añadido al sistema y se ha verificado que contiene múltiples paquetes relacionados con LibreOffice, cumpliendo así con los objetivos del ejercicio.
+                </p>
+            </section>
+
+        </div>
     </div>
 
-    <p>
-        En la página se puede observar el contenido del repositorio, incluyendo los paquetes y las
-        distribuciones soportadas.
-    </p>
-
-    <div class="captura">
-        <img src="media/captura3.PNG" alt="Visualización del PPA en Launchpad" style="width:100%; border:1px solid #00ff88; border-radius:6px;">
-        <p class="pie">Captura 1: Visualización del PPA en Launchpad.</p>
-    </div>
-
-    <h3>2. Añadir el PPA al sistema</h3>
-    <p>
-        En Linux Mint es posible añadir un PPA mediante el comando <span class="resaltado">add-apt-repository</span>.
-        Para añadir el repositorio se ejecutó el siguiente comando:
-    </p>
-
-    <div class="cajita">
-        <code>sudo add-apt-repository ppa:libreoffice/ppa</code>
-    </div>
-
-    <p>
-        Tras su ejecución, el sistema incorpora el repositorio al listado de orígenes de software.
-    </p>
-
-    <div class="captura">
-        <img src="media/captura4.PNG" alt="Añadiendo PPA desde terminal" style="width:100%; border:1px solid #00ff88; border-radius:6px;">
-        <p class="pie">Captura 2: Añadiendo el PPA desde la terminal.</p>
-    </div>
-
-    <h3>3. Actualización de la caché de paquetes</h3>
-    <p>
-        Para que el sistema reconozca los paquetes ofrecidos por el PPA es necesario actualizar la caché
-        de apt mediante el comando:
-    </p>
-
-    <div class="cajita">
-        <code>sudo apt update</code>
-    </div>
-
-    <p>
-        Este comando descarga la información de los paquetes desde el repositorio recién añadido.
-    </p>
-
-    <div class="captura">
-        <img src="media/captura5.PNG" alt="Actualizando caché de paquetes" style="width:100%; border:1px solid #00ff88; border-radius:6px;">
-        <p class="pie">Captura 3: Actualización de la caché de APT.</p>
-    </div>
-
-    <h3>4. Comprobación de paquetes disponibles</h3>
-    <p>
-        Finalmente, se realizó una búsqueda para listar los paquetes relacionados con LibreOffice
-        disponibles desde el repositorio:
-    </p>
-
-    <div class="cajita">
-        <code>apt search libreoffice</code>
-    </div>
-
-    <p>
-        La salida muestra múltiples paquetes como <span class="resaltado">writer, calc, impress, help</span> y otros módulos.
-    </p>
-
-    <div class="captura">
-        <img src="media/captura6.PNG" alt="Listado de paquetes LibreOffice" style="width:100%; border:1px solid #00ff88; border-radius:6px;">
-        <p class="pie">Captura 4: Listado de paquetes proporcionados por el PPA.</p>
-    </div>
-
-    <h3>Conclusión</h3>
-    <p>
-        Se ha ubicado un PPA válido, se ha añadido al sistema y se ha comprobado que ofrece múltiples paquetes
-        relacionados con LibreOffice. Con ello se cumple el objetivo del ejercicio.
-    </p>
-</section>
+</body>
+</html>

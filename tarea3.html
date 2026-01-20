@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 3 – Actualizaciones Windows 10</title>
+
+    <style>
+        :root {
+            --c-back: #0d0f10;
+            --c-text: #c8f7dc;
+            --c-accent: #28ff85;
+            --c-border: #2a3b32;
+            --c-fade: #112019;
+        }
+
+        body {
+            margin: 0;
+            background: var(--c-back);
+            color: var(--c-text);
+            font-family: Consolas, "Courier New", monospace;
+            padding: 32px;
+        }
+
+        h1, h2 {
+            color: var(--c-accent);
+            text-shadow: 0 0 8px var(--c-accent);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 28px;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--c-accent);
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+
+        p {
+            line-height: 1.55;
+            margin: 10px 0;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .etiqueta-ejercicio {
+            display: inline-block;
+            padding: 4px 10px;
+            border: 1px solid var(--c-accent);
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .cajita {
+            background: var(--c-fade);
+            border: 1px solid var(--c-border);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        pre {
+            color: var(--c-accent);
+            font-size: 14px;
+        }
+
+        code {
+            color: var(--c-accent);
+        }
+
+        .captura {
+            margin: 14px 0;
+            text-align: center;
+        }
+
+        .captura img {
+            width: 100%;
+            border: 1px solid var(--c-border);
+            border-radius: 6px;
+        }
+
+        .pie {
+            font-size: 13px;
+            margin-top: 4px;
+            opacity: 0.75;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Tarea 3 – Actualizaciones en Windows 10</h1>
+
+
+<!-- EJERCICIO 1 -->
+<section>
+    <div class="etiqueta-ejercicio">Ejercicio 1</div>
+    <h2>Deshabilitar las actualizaciones automáticas en Windows 10 Home</h2>
+
+    <p>
+        En este ejercicio se documentó un procedimiento para que un usuario sin conocimientos técnicos
+        pueda deshabilitar las actualizaciones automáticas en <span class="resaltado">Windows 10 Home</span>.
+        Se presentaron tanto métodos gráficos orientados al usuario como procedimientos técnicos que
+        deshabilitan efectivamente el servicio.
+    </p>
+
+    <h3>1. Acceso a Windows Update</h3>
+    <p>Desde el menú Inicio se accedió a Configuración → Actualización y seguridad.</p>
+
+    <div class="captura">
+        <img src="media/capturas13.PNG">
+        <p class="pie">Captura: Panel principal de Windows Update.</p>
+    </div>
+
+    <h3>2. Pausar actualizaciones (Método usuario cero)</h3>
+    <p>Windows 10 permite pausar temporalmente las actualizaciones automáticas.</p>
+
+    <div class="captura">
+        <img src="media/capturas14.PNG">
+        <p class="pie">Captura: Botón para pausar las actualizaciones.</p>
+    </div>
+
+    <h3>3. Método técnico desde servicios</h3>
+    <p>Para deshabilitar el servicio se utilizó la consola:</p>
+
+    <div class="cajita"><code>Win + R → services.msc</code></div>
+
+    <div class="captura">
+        <img src="media/capturas15.PNG">
+        <p class="pie">Captura: Consola de servicios del sistema.</p>
+    </div>
+
+    <p>Se seleccionó el servicio <code>Windows Update (wuauserv)</code> y se accedió a propiedades.</p>
+
+    <div class="captura">
+        <img src="media/capturas16.PNG">
+        <p class="pie">Captura: Propiedades del servicio Windows Update.</p>
+    </div>
+
+    <p>Para deshabilitar de forma efectiva se aplicó:</p>
+
+    <ul>
+        <li>Detener el servicio</li>
+        <li>Cambiar <span class="resaltado">Tipo de inicio</span> a <span class="resaltado">Deshabilitado</span></li>
+    </ul>
+
+    <h3>4. Opcional avanzado: Registro</h3>
+
+    <p>Dado que Windows 10 Home no incluye <code>gpedit.msc</code>, la política puede aplicarse vía Registro.</p>
+
+    <div class="cajita">
+        <code>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU</code>
+    </div>
+
+    <p>Clave implicada:</p>
+
+    <div class="cajita"><code>NoAutoUpdate (DWORD) = 1</code></div>
+
+    <div class="captura">
+        <img src="media/capturas17.PNG">
+        <p class="pie">Captura: Clave del Registro utilizada para bloquear actualizaciones.</p>
+    </div>
+
+    <h3>Conclusión</h3>
+    <p>
+        Combinando ambos métodos fue posible documentar el proceso completo para deshabilitar las
+        actualizaciones automáticas en Windows 10 Home.
+    </p>
+</section>
+
+
+<!-- EJERCICIO 2 -->
+<section>
+    <div class="etiqueta-ejercicio">Ejercicio 2</div>
+    <h2>Riesgos de deshabilitar las actualizaciones automáticas</h2>
+
+    <p>
+        Aunque deshabilitar las actualizaciones automáticas evita molestias temporales, presenta
+        riesgos significativos desde el punto de vista de seguridad informática.
+    </p>
+
+    <h3>1. Exposición a vulnerabilidades</h3>
+    <p>
+        Las actualizaciones corrigen vulnerabilidades documentadas. Al no aplicarse, estas pasan
+        de ser <span class="resaltado">zero-day</span> a vulnerabilidades conocidas, las cuales son
+        las más explotadas mediante malware, ransomware y ataques remotos.
+    </p>
+
+    <h3>2. Incompatibilidad de software</h3>
+    <p>
+        Aplicaciones modernas requieren versiones actualizadas del sistema y librerías. La falta
+        de parches puede impedir la ejecución correcta de navegadores, VPNs corporativas, suites de
+        ofimática o servicios bancarios.
+    </p>
+
+    <h3>3. Incumplimiento normativo</h3>
+    <p>
+        En entornos corporativos y educativos las actualizaciones son obligatorias para cumplir
+        estándares como ISO/IEC 27001, GDPR, ENS, PCI-DSS o HIPAA.
+    </p>
+
+    <h3>Conclusión</h3>
+    <p>
+        Desde el punto de vista operativo y de seguridad, deshabilitar las actualizaciones automáticas
+        no resulta recomendable.
+    </p>
+</section>
+
+
+<!-- EJERCICIO 3 -->
+<section>
+    <div class="etiqueta-ejercicio">Ejercicio 3</div>
+    <h2>Script PowerShell para habilitar actualizaciones automáticas</h2>
+
+    <p>
+        A continuación se presenta un script en PowerShell que revierte los cambios anteriores y habilita
+        las actualizaciones automáticas de Windows 10.
+    </p>
+
+    <h3>Script solicitado</h3>
+
+    <div class="cajita">
+        <pre>
+Set-Service -Name wuauserv -StartupType Automatic
+Start-Service -Name wuauserv
+
+Set-Service -Name UsoSvc -StartupType Automatic
+Start-Service -Name UsoSvc
+
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" `
+-Name "NoAutoUpdate" -ErrorAction SilentlyContinue
+        </pre>
+    </div>
+
+    <h3>Explicación de comandos</h3>
+    <ul>
+        <li><code>Set-Service</code>: configura el tipo de inicio del servicio.</li>
+        <li><code>Start-Service</code>: inicia el servicio inmediatamente.</li>
+        <li><code>UsoSvc</code>: servicio Update Orchestrator.</li>
+        <li><code>Remove-ItemProperty</code>: elimina claves que bloquean el mecanismo de actualización.
+        </li>
+    </ul>
+
+    <h3>Reversibilidad (opcional)</h3>
+    <p>
+        Si se quisiera convertir el script en reversible para deshabilitar de nuevo las actualizaciones:
+    </p>
+
+    <div class="cajita">
+        <pre>
+Set-Service -Name wuauserv -StartupType Disabled
+Stop-Service -Name wuauserv -Force
+
+Set-Service -Name UsoSvc -StartupType Disabled
+Stop-Service -Name UsoSvc -Force
+
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" `
+-Name "NoAutoUpdate" -Value 1 -Type DWord
+        </pre>
+    </div>
+</section>
+
+</body>
+</html>
 

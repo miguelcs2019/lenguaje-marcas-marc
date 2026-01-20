@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea – AppImage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --c-back: #0d0f10;
+            --c-text: #c8f7dc;
+            --c-accent: #28ff85;
+            --c-border: #2a3b32;
+            --c-fade: #112019;
+        }
+
+        body {
+            margin: 0;
+            padding: 32px;
+            background: var(--c-back);
+            color: var(--c-text);
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        h1, h2 {
+            color: var(--c-accent);
+            text-shadow: 0 0 6px var(--c-accent);
+        }
+
+        h1 {
+            margin-bottom: 26px;
+            font-size: 32px;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-top: 18px;
+        }
+
+        h3 {
+            margin-top: 14px;
+            color: var(--c-accent);
+        }
+
+        p {
+            line-height: 1.55;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .etiqueta-ejercicio {
+            display: inline-block;
+            padding: 4px 10px;
+            border: 1px solid var(--c-accent);
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .cajita {
+            background: var(--c-fade);
+            border: 1px solid var(--c-border);
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        code {
+            color: var(--c-accent);
+        }
+
+        .captura {
+            margin: 14px 0;
+            text-align: center;
+        }
+
+        .captura img {
+            width: 100%;
+            border: 1px solid var(--c-border);
+            border-radius: 6px;
+        }
+
+        .pie {
+            font-size: 13px;
+            opacity: 0.75;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Tarea – AppImage</h1>
+
+<!-- EJERCICIO 1 -->
+<section>
+    <div class="etiqueta-ejercicio">Ejercicio 1</div>
+    <h2>Diferencias respecto al espacio ocupado</h2>
+
+    <p>
+        Las aplicaciones distribuidas en formato <span class="resaltado">AppImage</span> se presentan como un único
+        archivo ejecutable que contiene en su interior las librerías necesarias para su funcionamiento. Debido a esto
+        suelen ocupar más espacio que un paquete instalado mediante <code>apt</code>, ya que estos reutilizan
+        bibliotecas ya presentes en el sistema, reduciendo el espacio total utilizado.
+    </p>
+
+    <p>
+        En los ejercicios anteriores, el software instalado desde repositorios consumía menos espacio individual, ya que
+        compartía dependencias con el resto del sistema. En cambio, AppImage empaqueta dichas dependencias, lo cual
+        incrementa su tamaño pero facilita la portabilidad y ejecución del software sin instalación real.
+    </p>
+</section>
+
+<!-- EJERCICIO 2 -->
+<section>
+    <div class="etiqueta-ejercicio">Ejercicio 2</div>
+    <h2>Instalación y ejecución de MuseScore en formato AppImage</h2>
+
+    <p>
+        Para completar el ejercicio se instaló la aplicación <span class="resaltado">MuseScore</span> mediante el
+        formato <span class="resaltado">AppImage</span>. Este formato permite ejecutar una aplicación sin instalarla,
+        sin dependencias externas y sin requerir permisos de administrador.
+    </p>
+
+    <h3>1. Descarga del archivo AppImage</h3>
+    <p>
+        Se accedió a la página oficial de descargas para obtener la versión correspondiente de MuseScore en formato
+        <code>.AppImage</code>.
+    </p>
+
+    <div class="captura">
+        <img src="media/capturas18.PNG">
+        <p class="pie">Captura: Página de descarga del AppImage.</p>
+    </div>
+
+    <h3>2. Archivo descargado en el sistema</h3>
+    <p>
+        Una vez descargado el archivo se almacenó en la carpeta de descargas del sistema.
+    </p>
+
+    <div class="captura">
+        <img src="media/capturas19.PNG">
+        <p class="pie">Captura: Archivo AppImage descargado.</p>
+    </div>
+
+    <h3>3. Asignación del permiso de ejecución</h3>
+    <p>
+        Antes de ejecutar el AppImage fue necesario activar el permiso de ejecución mediante
+        <code>Propiedades → Permisos</code> marcando la opción “Permitir ejecutar como programa”.
+    </p>
+
+    <div class="captura">
+        <img src="media/capturas20.PNG">
+        <p class="pie">Captura: Activación del permiso de ejecución.</p>
+    </div>
+
+    <h3>4. Ejecución del AppImage</h3>
+    <p>
+        Una vez otorgados los permisos se abrió el archivo mediante doble clic, ejecutando la aplicación sin necesidad
+        de instalación adicional.
+    </p>
+
+    <div class="captura">
+        <img src="media/capturas21.PNG">
+        <p class="pie">Captura: MuseScore ejecutándose en formato AppImage.</p>
+    </div>
+
+    <h3>Conclusión</h3>
+    <p>
+        El uso de AppImage permitió ejecutar MuseScore de forma portable y sin alterar el sistema, confirmando que se
+        trata de un formato adecuado para distribuciones que requieren simplicidad de despliegue o software ejecutable
+        en múltiples máquinas sin instalación previa.
+    </p>
+</section>
+
+</body>
+</html>

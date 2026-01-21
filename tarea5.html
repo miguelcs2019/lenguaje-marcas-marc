@@ -1,1 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Accesibilidad – Unidad 7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --c-back: #050608;
+            --c-back-outer: #000000;
+            --c-text: #c8f7dc;
+            --c-muted: #8ba99a;
+            --c-accent: #29ff87;
+            --c-border: #294536;
+            --c-block: #0c1410;
+            --c-chip: #101c16;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 32px 12px;
+            background: radial-gradient(circle at top, #112018 0, #050608 45%, #000000 100%);
+            color: var(--c-text);
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        .contenedor {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tarjeta {
+            background: linear-gradient(135deg, rgba(10,20,15,0.96), rgba(2,10,6,0.98));
+            border-radius: 14px;
+            padding: 28px 26px 32px;
+            border: 1px solid var(--c-border);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
+        }
+
+        header.titulo {
+            border-bottom: 1px solid var(--c-border);
+            padding-bottom: 16px;
+            margin-bottom: 26px;
+        }
+
+        header.titulo h1 {
+            margin: 0 0 6px 0;
+            font-size: 26px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--c-accent);
+            text-shadow: 0 0 10px rgba(41,255,135,0.7);
+        }
+
+        header.titulo p {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+
+        .datos-alumno {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 22px;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        .datos-alumno span {
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: var(--c-chip);
+            border: 1px solid var(--c-border);
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 18px;
+            margin-bottom: 10px;
+            color: var(--c-accent);
+            text-shadow: 0 0 8px rgba(41,255,135,0.5);
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            color: var(--c-accent);
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.55;
+            margin: 6px 0 8px 0;
+        }
+
+        ul {
+            margin: 6px 0 10px 20px;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        li {
+            margin: 3px 0;
+        }
+
+        .etiqueta-ejercicio {
+            display: inline-block;
+            padding: 3px 10px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            border-radius: 999px;
+            border: 1px solid var(--c-accent);
+            color: var(--c-accent);
+            background: rgba(5,12,8,0.9);
+        }
+
+        .cajita {
+            background: var(--c-chip);
+            border-radius: 6px;
+            border: 1px solid var(--c-border);
+            padding: 8px 12px;
+            font-size: 13px;
+            margin: 8px 0 10px 0;
+            overflow-x: auto;
+        }
+
+        code {
+            color: var(--c-accent);
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 13px;
+        }
+
+        .captura {
+            margin: 10px 0 14px 0;
+        }
+
+        .captura img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--c-border);
+        }
+
+        .pie {
+            font-size: 12px;
+            color: var(--c-muted);
+            margin-top: 4px;
+            opacity: 0.85;
+        }
+
+        .resaltado {
+            font-weight: 600;
+            color: var(--c-accent);
+        }
+
+        section {
+            padding: 12px 10px 18px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: rgba(4,12,8,0.95);
+            border: 1px solid rgba(35,70,50,0.8);
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 18px 8px;
+            }
+            .tarjeta {
+                padding: 20px 16px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="contenedor">
+    <div class="tarjeta">
+
+        <!-- HEADER -->
+        <header class="titulo">
+            <h1>Tarea: Accesibilidad</h1>
+            <p>Tema 7 – Sistemes Operatius</p>
+            <div class="datos-alumno">
+                <span>Alumno: Miguel</span>
+                <span>Fecha: ________</span>
+                <span>Módulo: Sistemes Operatius</span>
+            </div>
+        </header>
+
+        <!-- EJERCICIO 1 -->
+        <section>
+            <div class="etiqueta-ejercicio">Ejercicio 1</div>
+            <h2>Aplicación de temas de alto contraste en GNU/Linux</h2>
+
+            <h3>Concepto</h3>
+            <p>
+                Los <span class="resaltado">temas de alto contraste</span> forman parte de las herramientas de accesibilidad visual
+                integradas en los entornos gráficos de GNU/Linux. Su objetivo es incrementar la legibilidad mediante el aumento del
+                contraste entre texto, fondo y componentes de la interfaz, reduciendo la carga visual del usuario.
+            </p>
+
+            <h3>Aplicación en GNU/Linux</h3>
+            <p>
+                En entornos de escritorio como GNOME, Cinnamon o XFCE, el tema de alto contraste puede activarse desde el panel de
+                <span class="resaltado">Accesibilidad</span> o desde el apartado <span class="resaltado">Apariencia</span>. La configuración
+                afecta a elementos como menús, botones, barras de título, iconografía y selección de texto.
+            </p>
+
+            <div class="cajita">
+                <code>Configuración → Accesibilidad → Alto contraste</code>
+            </div>
+
+            <h3>¿Por qué es útil?</h3>
+            <p>
+                Estos temas son especialmente útiles para usuarios con:
+            </p>
+            <ul>
+                <li>Baja agudeza visual.</li>
+                <li>Fotofobia o sensibilidad lumínica.</li>
+                <li>Dificultades de discriminación cromática.</li>
+                <li>Fatiga visual crónica.</li>
+                <li>Necesidad de uso prolongado del equipo.</li>
+            </ul>
+
+            <p>
+                Además, el alto contraste reduce el esfuerzo cognitivo en la lectura prolongada, facilita la localización de elementos
+                visuales y mejora la usabilidad general del entorno, tanto en contextos educativos como profesionales.
+            </p>
+
+            <h3>Conclusión</h3>
+            <p>
+                La aplicación de temas de alto contraste en GNU/Linux constituye una medida de accesibilidad esencial para garantizar la
+                igualdad de acceso al entorno informático, cumpliendo principios de accesibilidad digital y favoreciendo la participación
+                de usuarios con discapacidad visual.
+            </p>
+        </section>
+
+        <!-- EJERCICIO 2 -->
+        <section>
+            <div class="etiqueta-ejercicio">Ejercicio 2</div>
+            <h2>Lectores de pantalla para Windows y GNU/Linux</h2>
+
+            <p>
+                Un lector de pantalla es un software que interpreta elementos visuales del sistema y los convierte en voz o en salida
+                braille, permitiendo el uso del ordenador por parte de personas con discapacidad visual.
+            </p>
+
+            <h3>Lectores de pantalla en Windows</h3>
+            <ul>
+                <li>
+                    <span class="resaltado">Narrador</span>: integrado en Windows, gratuito, con activación mediante
+                    <code>Win + Ctrl + Enter</code>.
+                </li>
+                <li>
+                    <span class="resaltado">NVDA</span>: software libre con soporte de voz y braille, muy extendido en
+                    entornos educativos y domésticos.
+                </li>
+                <li>
+                    <span class="resaltado">JAWS</span>: solución profesional de pago, ampliamente utilizada en entornos
+                    corporativos y administrativos.
+                </li>
+            </ul>
+
+            <h3>Lectores de pantalla en GNU/Linux</h3>
+            <ul>
+                <li>
+                    <span class="resaltado">ORCA</span>: lector principal integrado en GNOME y MATE, con salida por voz y
+                    braille, configurable desde el panel de accesibilidad.
+                </li>
+                <li>
+                    <span class="resaltado">Fenrir</span>: orientado a consola (TTY), útil en servidores o sistemas sin
+                    entorno gráfico.
+                </li>
+                <li>
+                    <span class="resaltado">Emacspeak</span>: sistema histórico integrado en el editor Emacs, orientado a
+                    productividad en línea de comandos.
+                </li>
+            </ul>
+
+            <h3>Conclusión</h3>
+            <p>
+                Windows dispone de soluciones nativas y comerciales ampliamente extendidas, mientras que GNU/Linux ofrece alternativas
+                libres y configurables. Ambos sistemas permiten el acceso a usuarios con discapacidad visual, eliminando barreras y
+                facilitando la interacción con el entorno digital.
+            </p>
+        </section>
+
+        <!-- EJERCICIO 3 -->
+        <section>
+            <div class="etiqueta-ejercicio">Ejercicio 3</div>
+            <h2>Teclado de barrido en Windows 10 y guía de uso asistido</h2>
+
+            <h3>Concepto</h3>
+            <p>
+                Un <span class="resaltado">teclado de barrido</span> es un método de acceso alternativo que permite la selección de
+                teclas o elementos mediante un recorrido automático del foco. Se emplea en el ámbito de la
+                <span class="resaltado">Comunicación Aumentativa y Alternativa (CAA)</span> cuando el usuario no puede realizar
+                selecciones directas mediante teclado, ratón o pantalla táctil.
+            </p>
+
+            <h3>Activación en Windows 10</h3>
+            <p>
+                Windows 10 incorpora un teclado en pantalla con modo de exploración. Se accede desde:
+            </p>
+            <div class="cajita">
+                <code>Configuración → Accesibilidad → Teclado → Teclado en pantalla</code>
+            </div>
+            <p>
+                Una vez activado el teclado en pantalla, se accede a sus opciones para habilitar el modo de exploración o barrido,
+                ajustando la forma en que el foco recorre las teclas.
+            </p>
+
+            <div class="captura">
+                <img src="media/capturas27.PNG" alt="Activación del teclado en pantalla y opciones de exploración">
+                <div class="pie">Captura: Activación del teclado en pantalla y acceso a las opciones de exploración.</div>
+            </div>
+
+            <h3>Barrido y selección</h3>
+            <p>
+                Con el barrido activado, el teclado recorre filas y, posteriormente, columnas. El sistema realiza el desplazamiento del
+                foco de forma automática; la selección se ejecuta mediante un único gesto (por ejemplo, la barra espaciadora, un click o
+                un pulsador adaptado), lo que reduce la necesidad de movimientos precisos.
+            </p>
+
+            <p>
+                Este método permite a la persona usuaria introducir texto o comandos utilizando un único canal de control, lo que resulta
+                especialmente útil en casos de movilidad reducida.
+            </p>
+
+            <div class="captura">
+                <img src="media/capturas28.PNG" alt="Teclado de barrido en funcionamiento">
+                <div class="pie">Captura: Teclado de barrido en funcionamiento y selección asistida.</div>
+            </div>
+
+            <h3>Guía para el asistente</h3>
+            <ul>
+                <li>
+                    <span class="resaltado">Inicio:</span> abrir el teclado en pantalla y activar el modo de exploración/barrido.
+                </li>
+                <li>
+                    <span class="resaltado">Selección:</span> confirmar únicamente cuando el usuario lo indique mediante mirada,
+                    gesto, movimiento de cabeza o cualquier señal acordada.
+                </li>
+                <li>
+                    <span class="resaltado">Corrección:</span> utilizar la tecla de borrado para corregir errores sin necesidad de
+                    reiniciar todo el proceso.
+                </li>
+                <li>
+                    <span class="resaltado">Ritmo:</span> ajustar la velocidad del barrido para evitar fatiga y permitir tiempo
+                    suficiente de respuesta.
+                </li>
+                <li>
+                    <span class="resaltado">Salida:</span> el texto generado puede emplearse en herramientas de mensajería, documentos
+                    o sistemas de comunicación asistida.
+                </li>
+            </ul>
+
+            <h3>Conclusión</h3>
+            <p>
+                El teclado de barrido en Windows 10 proporciona un método de acceso alternativo eficaz para personas con discapacidad
+                motora, permitiendo la interacción con el sistema mediante un único gesto y facilitando la intervención de asistentes
+                cuando es necesario.
+            </p>
+        </section>
+
+        <!-- EJERCICIO 4 -->
+        <section>
+            <div class="etiqueta-ejercicio">Ejercicio 4</div>
+            <h2>¿Qué es un comunicador pictográfico? Instalación de AraSuite en GNU/Linux</h2>
+
+            <h3>1. ¿Qué es un comunicador pictográfico?</h3>
+            <p>
+                Un <span class="resaltado">comunicador pictográfico</span> es una herramienta de
+                <span class="resaltado">Comunicación Aumentativa y Alternativa (CAA)</span> que permite a usuarios con dificultades del
+                habla o del lenguaje construir y comunicar mensajes mediante <span class="resaltado">pictogramas</span>. Estos pictogramas
+                representan acciones, objetos, conceptos o frases y se organizan en tableros o paneles.
+            </p>
+
+            <p>
+                Este tipo de herramientas se emplea habitualmente en entornos educativos, clínicos y terapéuticos, y está orientado a
+                usuarios con trastornos del desarrollo del lenguaje, TEA, parálisis cerebral, afasias u otras condiciones que dificultan
+                la comunicación verbal directa.
+            </p>
+
+            <h3>2. Instalación del comunicador AraSuite</h3>
+            <p>
+                Para cumplir el objetivo del ejercicio se ha seleccionado el comunicador pictográfico
+                <span class="resaltado">AraWord</span>, incluido dentro de la suite <span class="resaltado">AraSuite</span>. A
+                continuación se detalla el proceso de instalación realizado en GNU/Linux Mint.
+            </p>
+
+            <h4>2.1 Descarga</h4>
+            <p>
+                Se accede a la página oficial del proyecto para descargar el instalador:
+            </p>
+            <div class="captura">
+                <img src="media/capturas22.PNG" alt="Descarga de AraSuite">
+                <div class="pie">Captura: Página oficial de AraSuite con el enlace de descarga.</div>
+            </div>
+
+            <p>
+                El instalador se guarda correctamente en la carpeta Descargas:
+            </p>
+            <div class="captura">
+                <img src="media/capturas23.PNG" alt="Archivo de AraSuite en Descargas">
+                <div class="pie">Captura: Archivo instalador de AraSuite en la carpeta Descargas.</div>
+            </div>
+
+            <h4>2.2 Primer intento y detección de dependencias</h4>
+            <p>
+                Al ejecutar el instalador se detecta una dependencia no satisfecha, ya que AraSuite requiere
+                <span class="resaltado">Java</span> para funcionar. El instalador detiene el proceso mostrando el error correspondiente:
+            </p>
+            <div class="captura">
+                <img src="media/capturas24.PNG" alt="Error de Java al instalar AraSuite">
+                <div class="pie">Captura: Error de ejecución del instalador al no encontrar una JVM adecuada.</div>
+            </div>
+
+            <h4>2.3 Instalación de dependencias</h4>
+            <p>
+                Para resolver la incidencia se instala <span class="resaltado">OpenJDK 11</span> desde los repositorios del sistema:
+            </p>
+            <div class="cajita">
+                <code>sudo apt install openjdk-11-jre</code>
+            </div>
+            <div class="captura">
+                <img src="media/capturas25.PNG" alt="Instalación de OpenJDK 11">
+                <div class="pie">Captura: Instalación de OpenJDK 11 como dependencia de AraSuite.</div>
+            </div>
+
+            <h4>2.4 Instalación correcta de AraSuite</h4>
+            <p>
+                Una vez satisfecha la dependencia Java, el instalador continúa correctamente y finaliza la instalación en
+                <code>/opt/AraSuite</code>:
+            </p>
+            <div class="captura">
+                <img src="media/capturas26.PNG" alt="Instalación completada de AraSuite">
+                <div class="pie">Captura: Instalación de AraSuite completada en el sistema.</div>
+            </div>
+
+            <h4>2.5 Ejecución del comunicador</h4>
+            <p>
+                Finalmente se ejecuta el comunicador <span class="resaltado">AraWord</span> desde la suite AraSuite, cargando su
+                interfaz principal:
+            </p>
+            <div class="captura">
+                <img src="media/capturas27.PNG" alt="AraWord en funcionamiento">
+                <div class="pie">Captura: AraWord en ejecución como comunicador pictográfico.</div>
+            </div>
+
+            <h3>3. Conclusión</h3>
+            <p>
+                Se ha instalado un comunicador pictográfico funcional en GNU/Linux, cumpliendo el requisito de la práctica. La suite
+                AraSuite, y en particular AraWord, proporciona un entorno accesible para la expresión mediante pictogramas, contribuyendo
+                a la asistencia comunicativa en usuarios con diversidad funcional.
+            </p>
+        </section>
+
+    </div>
+</div>
+</body>
+</html>
 

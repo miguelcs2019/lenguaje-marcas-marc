@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administració de Xarxes – MiguelCS</title>
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #001a2e, #000);
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: white;
+        overflow-x: hidden;
+    }
+
+    /* ===== Murciélagos decorativos ===== */
+    .bat {
+        position: absolute;
+        font-size: 42px;
+        opacity: 0.15;
+        color: #4aa3ff;
+        animation: fly 18s linear infinite;
+    }
+
+    .bat:nth-child(1) { top: 10%; left: -50px; animation-delay: 0s; }
+    .bat:nth-child(2) { top: 30%; left: -80px; animation-delay: 6s; font-size: 32px; }
+    .bat:nth-child(3) { top: 55%; left: -60px; animation-delay: 12s; font-size: 50px; }
+
+    @keyframes fly {
+        from { transform: translateX(0); }
+        to { transform: translateX(120vw); }
+    }
+
+    header {
+        text-align: center;
+        padding: 40px 10px;
+        border-bottom: 3px solid #ff7a00;
+        background: #000;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 36px;
+        color: #ff7a00;
+        letter-spacing: 1px;
+    }
+
+    header p {
+        margin-top: 10px;
+        color: #4aa3ff;
+        font-size: 16px;
+    }
+
+    .contenedor {
+        max-width: 1000px;
+        margin: 60px auto;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .card {
+        background: #111;
+        border: 2px solid #ff7a00;
+        border-radius: 18px;
+        padding: 30px 20px;
+        text-decoration: none;
+        color: white;
+        transition: .35s;
+        box-shadow: 0 0 20px rgba(0,0,0,.6);
+    }
+
+    .card h2 {
+        margin-top: 0;
+        color: #ff7a00;
+        font-size: 22px;
+    }
+
+    .card p {
+        color: #ddd;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 0 30px rgba(255,122,0,.6);
+        background: #151515;
+    }
+
+    .volver {
+        display: inline-block;
+        margin-top: 60px;
+        padding: 16px 30px;
+        border-radius: 14px;
+        border: 2px solid #4aa3ff;
+        color: #4aa3ff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: .3s;
+    }
+
+    .volver:hover {
+        background: #4aa3ff;
+        color: #000;
+        box-shadow: 0 0 25px #4aa3ff;
+    }
+
+    footer {
+        margin-top: 80px;
+        padding: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #888;
+        border-top: 1px solid #222;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Murciélagos -->
+<div class="bat">🦇</div>
+<div class="bat">🦇</div>
+<div class="bat">🦇</div>
+
+<header>
+    <h1>Administració de Xarxes</h1>
+    <p>Configuración, análisis y seguridad de redes · MiguelCS</p>
+</header>
+
+<div class="contenedor">
+
+    <p>
+        En este apartado se presentan las prácticas relacionadas con la
+        administración de redes, configuración de sistemas Linux y análisis
+        de conectividad y seguridad.
+    </p>
+
+    <div class="grid">
+
+        <!-- PRÁCTICA 8.1 -->
+        <a class="card" href="xarxes1.html">
+            <h2>Práctica 8.1</h2>
+            <p>
+                Configuración de red en Linux: direccionamiento IP,
+                pruebas ICMP, ARP, cambio de MAC, escaneo de puertos,
+                servicios, DNS e iptables.
+            </p>
+        </a>
+
+        <!-- FUTURAS PRÁCTICAS -->
+        <div class="card">
+            <h2>Próximas prácticas</h2>
+            <p>
+                Espacio reservado para futuras prácticas de
+                administración de redes y servicios.
+            </p>
+        </div>
+
+    </div>
+
+    <a class="volver" href="index.html">← Volver al portal principal</a>
+
+</div>
+
+<footer>
+    Administració de Xarxes · MiguelCS · FP Sistemas
+</footer>
+
+</body>
+</html>

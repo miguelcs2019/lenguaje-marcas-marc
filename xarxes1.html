@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Práctica 8.1 – Configuración de red Linux</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #0e0e0e;
+        color: #e6e6e6;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    header {
+        background: #000;
+        padding: 30px 10px;
+        text-align: center;
+        border-bottom: 3px solid #ff7a00;
+    }
+
+    header h1 {
+        margin: 0;
+        color: #ff7a00;
+        font-size: 32px;
+        letter-spacing: 1px;
+    }
+
+    header p {
+        margin: 8px 0 0;
+        color: #4aa3ff;
+        font-size: 16px;
+    }
+
+    .contenedor {
+        width: 92%;
+        max-width: 1100px;
+        margin: 40px auto;
+    }
+
+    h2 {
+        margin-top: 50px;
+        color: #ff7a00;
+        border-left: 6px solid #ff7a00;
+        padding-left: 14px;
+    }
+
+    p {
+        line-height: 1.6;
+    }
+
+    .bloque {
+        background: #151515;
+        border: 1px solid #2a2a2a;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 25px 0;
+        box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+
+    .bloque h3 {
+        color: #4aa3ff;
+        margin-top: 0;
+    }
+
+    img {
+        width: 100%;
+        margin-top: 12px;
+        border-radius: 6px;
+        border: 1px solid #333;
+    }
+
+    .pie {
+        font-size: 13px;
+        color: #aaa;
+        margin-top: 6px;
+    }
+
+    footer {
+        margin-top: 60px;
+        padding: 20px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        border-top: 1px solid #333;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Práctica 8.1 – Configuración de red en Linux</h1>
+    <p>MiguelCS · Sistemas y Redes</p>
+</header>
+
+<div class="contenedor">
+
+<!-- ================= 2.0 ================= -->
+<h2>2.0 Configuración inicial de la red (VirtualBox)</h2>
+
+<div class="bloque">
+    <p>Se creó una red NAT en VirtualBox con direccionamiento 192.168.20.0/24, que posteriormente fue asignada a ambas máquinas virtuales.</p>
+
+    <img src="media/2.02026-02-06_14-51.png">
+    <p class="pie">Creación de la red NAT.</p>
+
+    <img src="media/2.02026-02-06_14-56.png">
+    <p class="pie">Asignación de la red NAT a ubuntu1.</p>
+
+    <img src="media/2.02026-02-06_14-56_1.png">
+    <p class="pie">Asignación de la red NAT a ubuntu2.</p>
+</div>
+
+<!-- ================= 2.1 ================= -->
+<h2>2.1 Configuración de IPs y conectividad</h2>
+
+<div class="bloque">
+    <p>Se configuraron direcciones IP estáticas mediante netplan en ambas máquinas virtuales y se comprobó la conectividad.</p>
+
+    <img src="media/2.12026-02-06_15-02.png">
+    <p class="pie">Configuración de red en ubuntu1.</p>
+
+    <img src="media/2.12026-02-06_15-05.png">
+    <p class="pie">Configuración de red en ubuntu2.</p>
+
+    <img src="media/2.12026-02-06_15-08.png">
+    <p class="pie">Comprobación de IP asignada.</p>
+
+    <img src="media/2.12026-02-06_15-20.png">
+    <p class="pie">Ping entre máquinas.</p>
+</div>
+
+<!-- ================= 2.2 ================= -->
+<h2>2.2 Configuración del hostname</h2>
+
+<div class="bloque">
+    <p>Se modificó el hostname utilizando el comando <strong>hostnamectl</strong>. En la segunda máquina se aplicó el mismo procedimiento.</p>
+
+    <img src="media/2.22026-02-06_18-41.png">
+    <p class="pie">Hostname configurado como ubuntu1_miguelcs.</p>
+</div>
+
+<!-- ================= 2.3 ================= -->
+<h2>2.3 Pruebas ICMP</h2>
+
+<div class="bloque">
+    <p>Se realizaron pruebas ICMP hacia la otra máquina, el gateway y un destino externo.</p>
+
+    <img src="media/2.32026-02-06_15-36.png">
+    <p class="pie">Pruebas ICMP correctas.</p>
+</div>
+
+<!-- ================= 2.4 ================= -->
+<h2>2.4 Tabla ARP</h2>
+
+<div class="bloque">
+    <p>Se consultó la tabla ARP para verificar la resolución IP–MAC.</p>
+
+    <img src="media/2.42026-02-06_15-38.png">
+    <p class="pie">Tabla ARP mostrada mediante arp -n.</p>
+
+    <img src="media/2.42026-02-06_15-39.png">
+    <p class="pie">Detalle de entradas ARP.</p>
+</div>
+
+<!-- ================= 2.5 ================= -->
+<h2>2.5 Cambio de dirección MAC</h2>
+
+<div class="bloque">
+    <p>Se modificó la dirección MAC de la segunda máquina y se comprobó la actualización de la tabla ARP.</p>
+
+    <img src="media/2.52026-02-06_15-45.png">
+    <p class="pie">Cambio de MAC en ubuntu2.</p>
+
+    <img src="media/2.52026-02-06_16-00.png">
+    <p class="pie">Nueva MAC reflejada en la tabla ARP.</p>
+</div>
+
+<!-- ================= 2.6 ================= -->
+<h2>2.6 Escaneo de puertos y servicios</h2>
+
+<div class="bloque">
+    <p>Se realizó un escaneo de puertos antes y después de instalar Apache y vsftpd.</p>
+
+    <img src="media/2.62026-02-06_16-08.png">
+    <p class="pie">Escaneo inicial con nmap.</p>
+
+    <img src="media/2.62026-02-06_17-18.png">
+    <p class="pie">Instalación de servicios.</p>
+
+    <img src="media/2.62026-02-06_17-25.png">
+    <p class="pie">Puertos abiertos tras la instalación.</p>
+</div>
+
+<!-- ================= 2.7 ================= -->
+<h2>2.7 Consultas DNS</h2>
+
+<div class="bloque">
+    <p>Se realizaron consultas DNS para distintos dominios públicos.</p>
+
+    <img src="media/2.72026-02-06_17-38.png">
+    <p class="pie">Resolución DNS correcta.</p>
+</div>
+
+<!-- ================= 2.8 ================= -->
+<h2>2.8 Activación y desactivación de la interfaz</h2>
+
+<div class="bloque">
+    <p>Se comprobó la conectividad continua al desactivar y reactivar la interfaz de red.</p>
+
+    <img src="media/2.82026-02-06_18-01.png">
+    <p class="pie">Interrupción y recuperación de la conectividad.</p>
+</div>
+
+<!-- ================= 2.9 ================= -->
+<h2>2.9 Contabilidad de paquetes con iptables</h2>
+
+<div class="bloque">
+    <p>Se configuraron reglas de iptables para contabilizar paquetes ICMP.</p>
+
+    <img src="media/2.92026-02-06_18-05.png">
+    <p class="pie">Contadores de iptables tras los pings.</p>
+</div>
+
+</div>
+
+<footer>
+    Práctica 8.1 · MiguelCS · Configuración de redes Linux
+</footer>
+
+</body>
+</html>

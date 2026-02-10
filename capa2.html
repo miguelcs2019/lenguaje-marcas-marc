@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capa 2 – Enlace de Datos · Modelo OSI</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #001a2e, #000);
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: white;
+}
+header {
+    background: #000;
+    padding: 40px 10px;
+    text-align: center;
+    border-bottom: 3px solid #ff7a00;
+}
+header h1 { margin: 0; color: #ff7a00; font-size: 36px; }
+header p { margin-top: 10px; color: #4aa3ff; }
+.contenedor { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
+.imagen img {
+    max-width: 100%;
+    border-radius: 12px;
+    border: 2px solid #ff7a00;
+}
+.bloque {
+    background: #111;
+    border-left: 6px solid #ff7a00;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.bloque h2 { color: #4aa3ff; margin-top: 0; }
+.frase {
+    padding: 20px;
+    background: #151515;
+    border-left: 6px solid #4aa3ff;
+    font-style: italic;
+}
+.navegacion { text-align: center; margin: 50px 0; }
+.navegacion a {
+    margin: 0 15px;
+    color: #4aa3ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Capa 2 – Enlace de Datos</h1>
+    <p>Modelo OSI & Ciberseguridad</p>
+</header>
+
+<div class="contenedor">
+
+<div class="imagen">
+    <img src="media/capa2.JPG" alt="Capa 2 Enlace de datos">
+</div>
+
+<div class="bloque">
+<h2>¿Qué hace?</h2>
+<p>
+Proporciona comunicación nodo a nodo dentro de la misma red local,
+encapsulando los datos en tramas y gestionando direcciones MAC,
+control de acceso al medio y detección básica de errores.
+</p>
+</div>
+
+<div class="bloque">
+<h2>Vulnerabilidades comunes</h2>
+<ul>
+<li>Envenenamiento ARP</li>
+<li>MAC Flooding</li>
+<li>VLAN Hopping</li>
+<li>Ataques Man-in-the-Middle</li>
+</ul>
+</div>
+
+<div class="bloque">
+<h2>Protocolos habituales</h2>
+<ul>
+<li>ARP</li>
+<li>Ethernet (802.3)</li>
+<li>802.1Q</li>
+<li>CDP, LLDP</li>
+</ul>
+</div>
+
+<div class="frase">
+🔐 Aquí se rompe la confianza en la red local.
+</div>
+
+<div class="navegacion">
+<a href="osi.html">← Volver al OSI</a>
+<a href="capa3.html">Siguiente capa →</a>
+</div>
+
+</div>
+</body>
+</html>

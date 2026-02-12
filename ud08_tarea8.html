@@ -209,6 +209,77 @@ El servidor NFS ha sido configurado correctamente y el cliente puede montar
 el recurso tanto manual como automáticamente. La comunicación y escritura
 funcionan correctamente, validando el funcionamiento del servicio NFS.
 </p>
+<!-- 4.8 -->
+<div class="paso">
+<h3>4.8 – Añadir IP del profesor al fichero /etc/exports</h3>
+
+<p>
+Según el enunciado del ejercicio 2, se debe añadir una línea en el fichero
+<code>/etc/exports</code> para permitir el acceso desde la IP del ordenador del profesor
+con permisos de lectura y escritura (rw).
+</p>
+
+<p>
+La línea añadida sería similar a:
+</p>
+
+<pre>
+/srv/nfscompartido  IP_PROFESOR(rw,sync,no_subtree_check)
+</pre>
+
+<p>
+Donde <strong>IP_PROFESOR</strong> debe sustituirse por la dirección IP real del equipo del profesor.
+</p>
+
+<p>
+Posteriormente, se aplican los cambios mediante:
+</p>
+
+<pre>
+sudo exportfs -a
+</pre>
+
+<p>
+Con ello, el servidor NFS permitirá el acceso al recurso compartido tanto al cliente
+configurado anteriormente como al equipo del profesor.
+</p>
+</div>
+
+
+<!-- 4.9 -->
+<div class="paso">
+<h3>4.9 – Desactivación de la línea en fstab</h3>
+
+<p>
+Según el ejercicio 3 del enunciado, se debe desactivar la línea añadida en
+<code>/etc/fstab</code> para evitar problemas en futuros arranques.
+</p>
+
+<p>
+Para ello, se edita el archivo:
+</p>
+
+<pre>
+sudo nano /etc/fstab
+</pre>
+
+<p>
+Y se comenta la línea correspondiente añadiendo el símbolo <code>#</code> al inicio:
+</p>
+
+<pre>
+#192.168.1.113:/srv/nfscompartido  /mnt/nfscliente  nfs  defaults  0  0
+</pre>
+
+<p>
+Al comentar esta línea, el sistema dejará de montar automáticamente el recurso NFS
+en futuros reinicios, evitando posibles errores si el servidor no estuviera disponible.
+</p>
+
+<p>
+De esta forma, el montaje solo se realizaría manualmente cuando sea necesario.
+</p>
+</div>
 
 </div>
 </body>

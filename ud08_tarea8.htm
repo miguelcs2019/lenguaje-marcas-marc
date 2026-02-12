@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>UD08 – Tarea 8 – NFS</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #0d0d0d;
+            color: #00ff88;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        header {
+            padding: 30px 0;
+            text-align: center;
+            font-size: 34px;
+            font-weight: bold;
+            background: black;
+            border-bottom: 2px solid #00ff88;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        h2 {
+            border-left: 6px solid #00ff88;
+            padding-left: 12px;
+            margin-top: 40px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .paso {
+            background: rgba(0,255,80,0.06);
+            border: 1px solid #0aff66;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        img {
+            width: 100%;
+            border: 1px solid #00ff88;
+            margin-top: 12px;
+        }
+
+        .pie {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-top: 6px;
+        }
+
+        pre {
+            background: #111;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>UD08 – Tarea 8: Configuración de NFS</header>
+
+<div class="contenedor">
+
+<h2>Objetivo</h2>
+<p>
+Configurar un servidor NFS en una máquina Linux y permitir que un cliente
+monte automáticamente un directorio compartido en red.
+</p>
+
+<!-- 4.0 -->
+<div class="paso">
+<h3>4.0 – Preparación del entorno</h3>
+<p>
+Se crean dos máquinas virtuales en la misma red:
+</p>
+<ul>
+<li>Servidor NFS – 192.168.1.113</li>
+<li>Cliente NFS – 192.168.1.114</li>
+</ul>
+<img src="media/4.0.PNG">
+<p class="pie">Captura 4.0 – Servidor y cliente en la misma red.</p>
+</div>
+
+<!-- 4.1 -->
+<div class="paso">
+<h3>4.1 – Instalación del servidor NFS</h3>
+<pre>
+sudo apt update
+sudo apt install nfs-kernel-server -y
+sudo systemctl status nfs-kernel-server
+</pre>
+<p>
+Se verifica que el servicio aparece como <strong>active (running)</strong>.
+</p>
+<img src="media/4.1.PNG">
+<p class="pie">Captura 4.1 – Servicio NFS activo en el servidor.</p>
+</div>
+
+<!-- 4.2 -->
+<div class="paso">
+<h3>4.2 – Configuración del directorio exportado</h3>
+<pre>
+sudo mkdir -p /srv/nfscompartido
+sudo chown nobody:nogroup /srv/nfscompartido
+sudo chmod 777 /srv/nfscompartido
+</pre>
+
+<p>Se añade en <code>/etc/exports</code>:</p>
+
+<pre>
+/srv/nfscompartido 192.168.1.114(rw,sync,no_subtree_check)
+</pre>
+
+<pre>
+sudo exportfs -a
+sudo exportfs -v
+</pre>
+
+<img src="media/4.2.PNG">
+<p class="pie">Captura 4.2 – Directorio exportado correctamente.</p>
+</div>
+
+<!-- 4.3 -->
+<div class="paso">
+<h3>4.3 – Instalación del cliente NFS</h3>
+<pre>
+sudo apt install nfs-common -y
+</pre>
+<img src="media/4.3.PNG">
+<p class="pie">Captura 4.3 – Instalación del cliente NFS.</p>
+</div>
+
+<!-- 4.4 -->
+<div class="paso">
+<h3>4.4 – Montaje manual desde el cliente</h3>
+<pre>
+sudo mkdir -p /mnt/nfscliente
+sudo mount 192.168.1.113:/srv/nfscompartido /mnt/nfscliente
+mount | grep nfs
+</pre>
+<img src="media/4.4.PNG">
+<p class="pie">Captura 4.4 – Montaje manual del recurso NFS.</p>
+</div>
+
+<!-- 4.5 -->
+<div class="paso">
+<h3>4.5 – Prueba funcional</h3>
+<p>
+Se crea un archivo desde el cliente y se comprueba en el servidor su existencia.
+Esto confirma que la comunicación y escritura funcionan correctamente.
+</p>
+<img src="media/4.5.PNG">
+<p class="pie">Captura 4.5 – Prueba de escritura cliente-servidor.</p>
+</div>
+
+<!-- 4.6 -->
+<div class="paso">
+<h3>4.6 – Configuración automática en fstab</h3>
+
+<p>Se añade en <code>/etc/fstab</code> del cliente:</p>
+
+<pre>
+192.168.1.113:/srv/nfscompartido  /mnt/nfscliente  nfs  defaults  0  0
+</pre>
+
+<p>
+El comando <code>systemctl daemon-reload</code> recarga la configuración de systemd
+para que reconozca los cambios realizados en fstab.
+</p>
+
+<pre>
+sudo systemctl daemon-reload
+sudo mount -a
+</pre>
+
+<img src="media/4.6.PNG">
+<p class="pie">Captura 4.6 – Configuración del montaje automático.</p>
+</div>
+
+<!-- 4.7 -->
+<div class="paso">
+<h3>4.7 – Verificación tras reinicio</h3>
+<p>
+Tras reiniciar el cliente, se verifica que el recurso NFS se monta automáticamente:
+</p>
+
+<pre>
+mount | grep nfs
+</pre>
+
+<img src="media/4.7.PNG">
+<p class="pie">Captura 4.7 – Montaje automático confirmado tras reinicio.</p>
+</div>
+
+<h2>Conclusión</h2>
+<p>
+El servidor NFS ha sido configurado correctamente y el cliente puede montar
+el recurso tanto manual como automáticamente. La comunicación y escritura
+funcionan correctamente, validando el funcionamiento del servicio NFS.
+</p>
+
+</div>
+</body>
+</html>

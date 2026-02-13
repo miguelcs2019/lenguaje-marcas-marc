@@ -186,5 +186,100 @@ de los datos y su ejecucion periodica.
 </p>
 
 </div>
+
+<h2>Anexo – Scripts utilizados en la practica</h2>
+
+<div class="paso">
+<h3>Script 1 – Backup incremental sin compresion</h3>
+
+<pre>
+#!/bin/bash
+
+FECHA=$(date +%Y%m%d)
+
+tar --create \
+--file=datosBackup.$FECHA.tar \
+--listed-incremental=datos.log \
+/home/miguel/DatosBackupsLinuX
+</pre>
+
+<p>
+Explicacion:
+</p>
+
+<ul>
+<li><strong>#!/bin/bash</strong> → Define el interprete del script.</li>
+<li><strong>FECHA=$(date +%Y%m%d)</strong> → Genera automaticamente la fecha actual en formato año-mes-dia.</li>
+<li><strong>datosBackup.$FECHA.tar</strong> → Crea un nombre dinamico para cada copia.</li>
+<li><strong>--listed-incremental=datos.log</strong> → Permite realizar copias incrementales reales.</li>
+<li><strong>/home/miguel/DatosBackupsLinuX</strong> → Directorio que se respalda.</li>
+</ul>
+</div>
+
+<div class="paso">
+<h3>Script 2 – Backup incremental con compresion gzip</h3>
+
+<pre>
+#!/bin/bash
+
+FECHA=$(date +%Y%m%d)
+
+tar --create \
+--gzip \
+--file=datosBackup.$FECHA.tar.gz \
+--listed-incremental=datos.log \
+/home/miguel/DatosBackupsLinuX
+</pre>
+
+<p>
+Explicacion:
+</p>
+
+<ul>
+<li><strong>--gzip</strong> → Activa compresion gzip, adecuada para archivos de texto plano.</li>
+<li><strong>.tar.gz</strong> → Extension del archivo comprimido.</li>
+<li>Reduce el tamaño final del backup manteniendo la estructura incremental.</li>
+</ul>
+</div>
+
+<div class="paso">
+<h3>Servicio y Timer systemd</h3>
+
+<p>Archivo backup_miguel.service:</p>
+
+<pre>
+[Unit]
+Description=Backup incremental comprimido de DatosBackupsLinuX
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/miguel/backup_incremental_gzip.sh
+</pre>
+
+<p>
+El servicio ejecuta el script una sola vez cada vez que es invocado.
+</p>
+
+<p>Archivo backup_miguel.timer:</p>
+
+<pre>
+[Unit]
+Description=Ejecucion diaria del backup incremental
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+</pre>
+
+<p>
+OnCalendar=daily → Ejecuta el backup cada dia.  
+Persistent=true → Si el equipo estuvo apagado, ejecuta la tarea al encenderse.
+</p>
+</div>
+
+    
 </body>
 </html>
